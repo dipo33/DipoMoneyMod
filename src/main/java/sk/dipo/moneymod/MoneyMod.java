@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sk.dipo.moneymod.capabilities.CapabilityHandler;
 import sk.dipo.moneymod.init.ModItems;
 
 @Mod(MoneyMod.MODID)
@@ -25,6 +26,7 @@ public class MoneyMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 
         instance = this;
 
