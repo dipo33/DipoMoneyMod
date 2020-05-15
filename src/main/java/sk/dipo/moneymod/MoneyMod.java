@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sk.dipo.moneymod.init.ModItems;
 
 @Mod(MoneyMod.MODID)
 public class MoneyMod {
@@ -28,6 +29,7 @@ public class MoneyMod {
         instance = this;
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModItems.ITEMS.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
