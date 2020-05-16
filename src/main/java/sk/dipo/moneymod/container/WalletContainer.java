@@ -86,6 +86,7 @@ public class WalletContainer extends Container {
         switch (clickTypeIn) {
             case PICKUP:
             case THROW:
+            case QUICK_MOVE:
                 returnStack = super.slotClick(slotId, dragType, clickTypeIn, player);
                 if (isSlotOpenedWallet)
                     player.closeScreen();
@@ -94,7 +95,6 @@ public class WalletContainer extends Container {
                 if (isSlotOpenedWallet)
                     return ItemStack.EMPTY;
                 return super.slotClick(slotId, dragType, clickTypeIn, player);
-            case QUICK_MOVE:
             case SWAP:
                 if (isSlotOpenedWallet || isSlotOpenedWallet(dragType + 54)) {
                     returnStack = super.slotClick(slotId, dragType, clickTypeIn, player);
