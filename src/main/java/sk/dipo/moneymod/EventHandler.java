@@ -30,9 +30,9 @@ public class EventHandler {
                 }
             }
         }
-        if (remainder.getCount() != event.getItem().getItem().getCount()) {
-            event.getItem().setItem(remainder);
+        if (remainder.isEmpty())
             event.setResult(Event.Result.ALLOW);
-        }
+        if (remainder.getCount() != event.getItem().getItem().getCount())
+            event.getItem().setItem(remainder);
     }
 }
