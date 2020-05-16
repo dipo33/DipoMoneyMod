@@ -27,6 +27,6 @@ public class WalletItem extends Item {
                     packet -> {
                 packet.writeByte(handIn.ordinal());
             });
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
     }
 }
