@@ -1,5 +1,6 @@
 package sk.dipo.moneymod;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.Hand;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -15,7 +16,7 @@ public class ModEventBusSubscriber {
     public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
         event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
             Hand hand = data.readEnumValue(Hand.class);
-            return new WalletContainer(windowId, inv, hand);
+            return new WalletContainer(windowId, inv, Minecraft.getInstance().player, hand);
         }).setRegistryName("wallet_container"));
     }
 }
