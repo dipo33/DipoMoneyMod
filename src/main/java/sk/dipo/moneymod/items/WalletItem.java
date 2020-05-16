@@ -13,6 +13,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.container.WalletContainer;
 import sk.dipo.moneymod.init.ModContainerTypes;
@@ -36,7 +38,7 @@ public class WalletItem extends Item {
 
                         @Override
                         public Container createMenu(int windowID, PlayerInventory inv, PlayerEntity player) {
-                            return new WalletContainer(windowID, inv, playerIn, handIn);
+                            return new WalletContainer(windowID, inv, playerIn.getHeldItem(handIn));
                         }
                     },
                     packet -> {
