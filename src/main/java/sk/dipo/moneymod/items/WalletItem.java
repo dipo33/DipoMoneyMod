@@ -13,7 +13,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import sk.dipo.moneymod.container.factory.WalletContainer;
+import sk.dipo.moneymod.container.ContainerHelper;
+import sk.dipo.moneymod.container.WalletContainer;
+import sk.dipo.moneymod.init.ModContainerTypes;
 
 public class WalletItem extends Item {
 
@@ -29,7 +31,7 @@ public class WalletItem extends Item {
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new INamedContainerProvider() {
                         @Override
                         public ITextComponent getDisplayName() {
-                            return new TranslationTextComponent("container.wallet.dipo");
+                            return new TranslationTextComponent(ContainerHelper.getUnlocalizedText(ModContainerTypes.WALLET.get()));
                         }
 
                         @Override

@@ -1,18 +1,21 @@
 package sk.dipo.moneymod.init;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraftforge.registries.ObjectHolder;
-import sk.dipo.moneymod.container.factory.WalletContainer;
+import net.minecraft.util.Hand;
+import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.container.WalletContainer;
 
 public class ModContainerTypes {
 
-    @ObjectHolder("dipomoneymod:wallet_container")
-    public static ContainerType<WalletContainer> WALLET_CONTAINER = null;
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MoneyMod.MODID);
 
-//    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MoneyMod.MODID);
-//
-//    public static final RegistryObject<ContainerType<WalletContainer>> WALLET = CONTAINER_TYPES.register("wallet", IForgeContainerType.create((windowId, inv, data) -> {
-//        Hand pos = data.readEnumValue(Hand.class);
-//        return new WalletContainer(windowId, inv, pos);
-//    }));
+    public static final RegistryObject<ContainerType<WalletContainer>> WALLET = CONTAINER_TYPES.register("wallet", () -> IForgeContainerType.create((windowId, inv, data) -> {
+        Hand hand = data.readEnumValue(Hand.class);
+        return new WalletContainer(windowId, inv, Minecraft.getInstance().player, hand);
+    }));
 }

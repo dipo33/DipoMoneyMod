@@ -1,12 +1,12 @@
 package sk.dipo.moneymod.client.gui;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import sk.dipo.moneymod.container.factory.WalletContainer;
+import sk.dipo.moneymod.container.WalletContainer;
 
 public class WalletScreen extends ContainerScreen<WalletContainer> {
 
@@ -17,6 +17,7 @@ public class WalletScreen extends ContainerScreen<WalletContainer> {
     public WalletScreen(WalletContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
         this.inventoryPlayer = inv;
+        this.ySize = 168;
     }
 
     @Override
@@ -28,17 +29,17 @@ public class WalletScreen extends ContainerScreen<WalletContainer> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-//        this.fontRenderer.drawString(wallet.getDisplayName(), 8, 5, 4210752);
-//        this.fontRenderer.drawString(I18n.format(this.inventoryPlayer.getName(), new Object[0]), 8, this.ySize - 93, 4210752);
+        this.font.drawString(this.title.getFormattedText(), 8.0F, 6.0F, 0x404040);
+        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 96 + 2), 0x404040);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GUI);
         int relX = (this.width - this.xSize) / 2;
         int relY = (this.height - this.ySize) / 2;
-        this.blit(relX, relY - 1, 0, 0, this.xSize, 71);
-        this.blit(relX, relY + 70, 0, 126, this.xSize, 96);
+        this.blit(relX, relY, 0, 0, this.xSize, 71);
+        this.blit(relX, relY + 71, 0, 126, this.xSize, 96);
     }
 }

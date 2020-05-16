@@ -17,5 +17,7 @@
 	"item.dipomoneymod.euro500": "500.00€",
 	"item.dipomoneymod.wallet": "Wallet",
 
+	"container.dipomoneymod.wallet":  "Wallet",
+
 	"itemGroup.dipomoneymod": "Dipo's Money Mod"
 }
