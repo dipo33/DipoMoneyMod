@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "dipomoneymod",
+  "ingredients": [
+    {
+      "item": "dipomoneymod:euro100"
+    }
+  ],
+  "result": {
+    "item": "dipomoneymod:euro50",
+    "count": 2
+  }
+}

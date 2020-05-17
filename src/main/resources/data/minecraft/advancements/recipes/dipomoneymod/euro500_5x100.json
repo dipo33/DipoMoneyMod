@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:euro500_5x100"
+    ]
+  },
+  "criteria": {
+    "100e": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:euro100"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:euro500_5x100"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "100e",
+      "has_the_recipe"
+    ]
+  ]
+}

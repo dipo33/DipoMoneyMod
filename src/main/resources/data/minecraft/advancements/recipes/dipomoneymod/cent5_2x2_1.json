@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cent5_2x2_1"
+    ]
+  },
+  "criteria": {
+    "2c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:cent2"
+          }
+        ]
+      }
+    },
+    "1c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:cent1"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cent5_2x2_1"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "2c",
+      "1c",
+      "has_the_recipe"
+    ]
+  ]
+}

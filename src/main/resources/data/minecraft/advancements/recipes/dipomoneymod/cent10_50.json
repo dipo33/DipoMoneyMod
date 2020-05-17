@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cent10_50"
+    ]
+  },
+  "criteria": {
+    "50c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:cent50"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cent10_50"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "50c",
+      "has_the_recipe"
+    ]
+  ]
+}

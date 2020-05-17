@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:euro5_2x2_1"
+    ]
+  },
+  "criteria": {
+    "2e": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:euro2"
+          }
+        ]
+      }
+    },
+    "1e": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:euro1"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:euro5_2x2_1"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "2e",
+      "1e",
+      "has_the_recipe"
+    ]
+  ]
+}

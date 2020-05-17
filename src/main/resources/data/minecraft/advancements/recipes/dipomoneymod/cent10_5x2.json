@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cent10_5x2"
+    ]
+  },
+  "criteria": {
+    "2c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "dipomoneymod:cent2"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cent10_5x2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "2c",
+      "has_the_recipe"
+    ]
+  ]
+}
