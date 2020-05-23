@@ -1,5 +1,6 @@
 package sk.dipo.moneymod;
 
+import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -16,6 +17,8 @@ import sk.dipo.moneymod.capabilities.CapabilityHandler;
 import sk.dipo.moneymod.config.DipoConfig;
 import sk.dipo.moneymod.init.ModContainerTypes;
 import sk.dipo.moneymod.init.ModItems;
+import sk.dipo.moneymod.init.ModPOITypes;
+import sk.dipo.moneymod.init.ModVillagerProfessions;
 
 @Mod(MoneyMod.MODID)
 public class MoneyMod {
@@ -27,6 +30,7 @@ public class MoneyMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DipoConfig.CLIENT_SPEC);
@@ -40,6 +44,8 @@ public class MoneyMod {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.ITEMS.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        ModPOITypes.POI_TYPES.register(modEventBus);
+        ModVillagerProfessions.PROFESSIONS.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -50,6 +56,11 @@ public class MoneyMod {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // Client-Only Code
+    }
+
+    private void init(final FMLCommonSetupEvent event) {
+        // Server-Side Code
+        PointOfInterestType.registerBlockStates(ModPOITypes.ATM.get());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

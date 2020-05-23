@@ -19,5 +19,7 @@
 
 	"container.dipomoneymod.wallet":  "Wallet",
 
+	"entity.minecraft.villager.dipomoneymod.exchanger":  "Exchanger",
+
 	"itemGroup.dipomoneymod": "Dipo's Money Mod"
 }
