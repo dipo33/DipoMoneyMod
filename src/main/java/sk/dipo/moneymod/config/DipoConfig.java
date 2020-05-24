@@ -1,6 +1,7 @@
 package sk.dipo.moneymod.config;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.items.MoneyItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +21,9 @@ public class DipoConfig {
     public static final ForgeConfigSpec CLIENT_SPEC;
     public static boolean doMobsDropMoney;
     public static boolean allowVillager;
-    public static int emeraldValue;
-    public static Map<EntityType, Tuple<Integer, Integer>> ENTITIES;
+    public static ItemStack emeraldValue;
+    public static ItemStack goldValue;
+    public static Map<EntityType<?>, Tuple<Integer, Integer>> ENTITIES;
 
     static {
         ENTITIES = new HashMap<>();
@@ -98,7 +101,11 @@ public class DipoConfig {
     public static void bakeConfig() {
         doMobsDropMoney = CLIENT.doMobsDropMoney.get();
         allowVillager = CLIENT.allowVillager.get();
-        emeraldValue = CLIENT.emeraldValue.get();
+
+        int maxCoinValue = MoneyItem.getMaxCoinValue(CLIENT.emeraldValue.get());
+        emeraldValue = new ItemStack(MoneyItem.getCoinByValue(maxCoinValue), CLIENT.emeraldValue.get() / maxCoinValue);
+        maxCoinValue = MoneyItem.getMaxCoinValue(CLIENT.goldValue.get());
+        goldValue = new ItemStack(MoneyItem.getCoinByValue(maxCoinValue), CLIENT.goldValue.get() / maxCoinValue);
 
         CLIENT.ENTITIES.forEach((k, v) ->
             ENTITIES.put(k, new Tuple<>(v.getA().get(), v.getB().get()))
@@ -117,7 +124,8 @@ public class DipoConfig {
         public final ForgeConfigSpec.BooleanValue doMobsDropMoney;
         public final ForgeConfigSpec.BooleanValue allowVillager;
         public final ForgeConfigSpec.IntValue emeraldValue;
-        public final Map<EntityType, Tuple<ForgeConfigSpec.IntValue, ForgeConfigSpec.IntValue>> ENTITIES  = new HashMap<>();
+        public final ForgeConfigSpec.IntValue goldValue;
+        public final Map<EntityType<?>, Tuple<ForgeConfigSpec.IntValue, ForgeConfigSpec.IntValue>> ENTITIES  = new HashMap<>();
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             doMobsDropMoney = builder
@@ -134,6 +142,10 @@ public class DipoConfig {
                     .comment("Value of one emerald in cents")
                     .translation(MoneyMod.MODID + ".config." + "emeraldValue")
                     .defineInRange("emeraldValue", 500, 0, 3200000);
+            goldValue = builder
+                    .comment("Value of one gold ingot in cents")
+                    .translation(MoneyMod.MODID + ".config." + "goldValue")
+                    .defineInRange("goldValue", 100, 0, 3200000);
             builder.pop();
 
             builder.push("Mob Drops");

@@ -5,7 +5,7 @@ import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
-import sk.dipo.moneymod.init.ModItems;
+import sk.dipo.moneymod.config.DipoConfig;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,10 +19,10 @@ public class ModVillagerTrades {
     static {
         EXCHANGER_TRADES.put(1, Arrays.asList(
                 new VillagerTrades.ITrade[]{
-                        new VillagerTrade(new ItemStack(Items.EMERALD), new ItemStack(ModItems.EURO_5.get()), 16, 0),
-                        new VillagerTrade(new ItemStack(ModItems.EURO_5.get()), new ItemStack(Items.EMERALD), 16, 0),
-                        new VillagerTrade(new ItemStack(Items.GOLD_INGOT), new ItemStack(ModItems.EURO_1.get()), 16, 0),
-                        new VillagerTrade(new ItemStack(ModItems.EURO_1.get()), new ItemStack(Items.GOLD_INGOT), 16, 0)
+                        new VillagerTrade(new ItemStack(Items.EMERALD), DipoConfig.emeraldValue, 16, 0),
+                        new VillagerTrade(DipoConfig.emeraldValue, new ItemStack(Items.EMERALD), 16, 0),
+                        new VillagerTrade(new ItemStack(Items.GOLD_INGOT), DipoConfig.goldValue, 16, 0),
+                        new VillagerTrade(DipoConfig.goldValue, new ItemStack(Items.GOLD_INGOT), 16, 0)
                 })
         );
     }

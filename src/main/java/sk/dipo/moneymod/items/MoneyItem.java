@@ -4,11 +4,9 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import org.apache.logging.log4j.LogManager;
 import sk.dipo.moneymod.init.ModItemGroups;
 import sk.dipo.moneymod.init.ModItems;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MoneyItem extends Item {
@@ -19,6 +17,14 @@ public class MoneyItem extends Item {
 
     public MoneyItem(Properties properties) {
         super(properties.group(ModItemGroups.MOD_ITEM_GROUP));
+    }
+
+    public static int getMaxCoinValue(int value) {
+        for (int coin : COIN_VALUES) {
+            if (value / coin > 0)
+                return coin;
+        }
+        return 0;
     }
 
     public static Item getCoinByValue(int value) {
