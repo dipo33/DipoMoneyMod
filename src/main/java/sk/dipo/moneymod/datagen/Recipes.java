@@ -1,9 +1,7 @@
 package sk.dipo.moneymod.datagen;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.*;
+import net.minecraft.item.Items;
 import sk.dipo.moneymod.MoneyMod;
 import sk.dipo.moneymod.init.ModItems;
 
@@ -17,6 +15,16 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get())
+                .patternLine(" S ")
+                .patternLine("LLL")
+                .patternLine(" S ")
+                .key('S', Items.STRING)
+                .key('L', Items.LEATHER)
+                .addCriterion("leather", hasItem(Items.LEATHER))
+                .addCriterion("string", hasItem(Items.STRING))
+                .build(consumer);
+
         /* Smaller to bigger */
         ShapelessRecipeBuilder.shapelessRecipe(ModItems.EURO_500.get())
                 .addIngredient(ModItems.EURO_200.get(), 2)
