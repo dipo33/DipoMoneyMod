@@ -54,7 +54,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void onEntityDropEvent(LivingDropsEvent event) {
-        if (event.getEntity().world.isRemote)
+        if (!DipoConfig.doMobsDropMoney)
             return;
         if (DipoConfig.ENTITIES.containsKey(event.getEntity().getType())) {
             Tuple<Integer, Integer> values = DipoConfig.ENTITIES.get(event.getEntity().getType());
