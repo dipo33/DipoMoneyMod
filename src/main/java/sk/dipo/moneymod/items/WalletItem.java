@@ -13,8 +13,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.container.WalletContainer;
 import sk.dipo.moneymod.init.ModContainerTypes;

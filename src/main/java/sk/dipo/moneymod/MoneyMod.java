@@ -27,21 +27,21 @@ public class MoneyMod {
     public static MoneyMod instance;
 
     public MoneyMod() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::enqueueIMC);
+        modEventBus.addListener(this::processIMC);
+        modEventBus.addListener(this::init);
+        modEventBus.addListener(this::doClientStuff);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DipoConfig.CLIENT_SPEC);
-
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 
         instance = this;
 
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.ITEMS.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
         ModPOITypes.POI_TYPES.register(modEventBus);
