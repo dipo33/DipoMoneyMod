@@ -3,7 +3,6 @@ package sk.dipo.moneymod.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import sk.dipo.moneymod.container.WalletContainer;
@@ -11,12 +10,9 @@ import sk.dipo.moneymod.container.WalletContainer;
 public class WalletScreen extends ContainerScreen<WalletContainer> {
 
     private static final ResourceLocation GUI = new ResourceLocation("minecraft", "textures/gui/container/generic_54.png");
-    private final PlayerInventory inventoryPlayer;
-    private ItemStack wallet;
 
     public WalletScreen(WalletContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
-        this.inventoryPlayer = inv;
         this.ySize = 168;
     }
 
@@ -35,6 +31,8 @@ public class WalletScreen extends ContainerScreen<WalletContainer> {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        assert this.minecraft != null : "Minecraft is null";
+
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GUI);
         int relX = (this.width - this.xSize) / 2;

@@ -2,6 +2,7 @@ package sk.dipo.moneymod.datagen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -15,6 +16,7 @@ import net.minecraft.world.storage.loot.functions.SetContents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -44,8 +46,8 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
                         .acceptFunction(CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY)
                                 .addOperation("inv", "BlockEntityTag.inv", CopyNbt.Action.REPLACE)
                                 .addOperation("energy", "BlockEntityTag.energy", CopyNbt.Action.REPLACE))
-                        .acceptFunction(SetContents.func_215920_b()
-                                .func_216075_a(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents"))))
+                        .acceptFunction(SetContents.builder()
+                                .addLootEntry(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents"))))
                 );
         return LootTable.builder().addLootPool(builder);
     }
@@ -59,6 +61,7 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void act(DirectoryCache cache) {
         addTables();
 
@@ -82,7 +85,8 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
     }
 
     @Override
+    @MethodsReturnNonnullByDefault
     public String getName() {
-        return "MyTutorial LootTables";
+        return "DipoMoneyMod LootTables";
     }
 }

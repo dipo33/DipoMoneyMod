@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
 import sk.dipo.moneymod.config.DipoConfig;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,7 @@ public class ModVillagerTrades {
             this.priceMultiplier = 0.05F;
         }
 
+        @ParametersAreNonnullByDefault
         public MerchantOffer getOffer(Entity trader, Random rand) {
             return new MerchantOffer(sellStack, buyStack, this.maxUses, this.xpValue, this.priceMultiplier);
         }

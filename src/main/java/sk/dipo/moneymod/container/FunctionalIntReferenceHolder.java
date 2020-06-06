@@ -5,11 +5,6 @@ import net.minecraft.util.IntReferenceHolder;
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
-/**
- * An {@link IntReferenceHolder} that uses {@link IntSupplier}s for its getter and setter
- *
- * @author Cadiboo
- */
 public class FunctionalIntReferenceHolder extends IntReferenceHolder {
 
     private final IntSupplier getter;

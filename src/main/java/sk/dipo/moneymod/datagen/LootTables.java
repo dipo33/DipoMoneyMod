@@ -10,6 +10,6 @@ public class LootTables extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-//        lootTables.put(Blocks.NETHERRACK, createStandardTable("nederak", Blocks.NETHERRACK));
+//        lootTables.put(Blocks.NETHERRACK, createStandardTable("NETHERRACK", Blocks.NETHERRACK));
     }
 }

@@ -4,7 +4,6 @@ import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Tuple;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -33,7 +32,9 @@ public class EventHandler {
         PlayerInventory inv = event.getPlayer().inventory;
         for (int i = 0; i < 36 && remainder != ItemStack.EMPTY; i++) {
             if (inv.mainInventory.get(i).getItem() == ModItems.WALLET.get()) {
-                IItemHandler walletInventory = inv.mainInventory.get(i).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+                IItemHandler walletInventory = inv.mainInventory.get(i).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(
+                        () -> new NullPointerException("Null WALLET capability")
+                );
                 for (int j = 0; j < 27 && remainder != ItemStack.EMPTY; j++) {
                     remainder = walletInventory.insertItem(j, remainder, false);
                 }

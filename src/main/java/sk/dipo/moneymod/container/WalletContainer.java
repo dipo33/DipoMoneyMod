@@ -1,5 +1,6 @@
 package sk.dipo.moneymod.container;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
@@ -12,16 +13,19 @@ import net.minecraftforge.items.SlotItemHandler;
 import sk.dipo.moneymod.init.ModContainerTypes;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class WalletContainer extends Container {
 
-    private ItemStack wallet;
+    private final ItemStack WALLET;
 
     public WalletContainer(final int windowId, final PlayerInventory playerInventory, ItemStack wallet) {
         super(ModContainerTypes.WALLET.get(), windowId);
-        this.wallet = wallet;
+        this.WALLET = wallet;
 
-        IItemHandler walletInventory = this.wallet.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+        IItemHandler walletInventory = this.WALLET.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(
+                () -> new NullPointerException("Null WALLET capability")
+        );
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < 9; ++k) {
                 this.addSlot(new SlotItemHandler(walletInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
@@ -48,8 +52,9 @@ public class WalletContainer extends Container {
      * @param index  the index passed in
      * @return the {@link ItemStack}
      */
-    @Nonnull
     @Override
+    @Nonnull
+    @ParametersAreNonnullByDefault
     public ItemStack transferStackInSlot(final PlayerEntity player, final int index) {
         ItemStack returnStack = ItemStack.EMPTY;
         final Slot slot = this.inventorySlots.get(index);
@@ -79,6 +84,8 @@ public class WalletContainer extends Container {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
+    @MethodsReturnNonnullByDefault
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         boolean isSlotOpenedWallet = isSlotOpenedWallet(slotId);
         ItemStack returnStack;
@@ -108,10 +115,11 @@ public class WalletContainer extends Container {
 
 
     private boolean isSlotOpenedWallet(int slotId) {
-        return slotId >= 0 && getSlot(slotId).getStack() == this.wallet;
+        return slotId >= 0 && getSlot(slotId).getStack() == this.WALLET;
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public boolean canInteractWith(PlayerEntity playerIn) {
         return true;
     }
