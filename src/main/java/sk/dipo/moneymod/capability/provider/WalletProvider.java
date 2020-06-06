@@ -1,4 +1,4 @@
-package sk.dipo.moneymod.capabilities.providers;
+package sk.dipo.moneymod.capability.provider;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.INBT;

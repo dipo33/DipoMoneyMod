@@ -2,6 +2,7 @@ package sk.dipo.moneymod;
 
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +14,10 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sk.dipo.moneymod.capabilities.CapabilityHandler;
+import sk.dipo.moneymod.capability.CapabilityHandler;
+import sk.dipo.moneymod.capability.capability.CreditCardCap;
+import sk.dipo.moneymod.capability.capability.ICreditCard;
+import sk.dipo.moneymod.capability.storage.CreditCardStorage;
 import sk.dipo.moneymod.config.DipoConfig;
 import sk.dipo.moneymod.init.*;
 
@@ -49,6 +53,9 @@ public class MoneyMod {
     private void setup(final FMLCommonSetupEvent event) {
         // Pre-Init Code
         LOGGER.info("Pre-Init Started");
+
+        CapabilityManager.INSTANCE.register(ICreditCard.class, new CreditCardStorage(), CreditCardCap::new);
+
         LOGGER.info("Pre-Init Finished");
     }
 

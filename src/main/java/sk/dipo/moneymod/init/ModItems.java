@@ -5,6 +5,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.items.CreditCardItem;
 import sk.dipo.moneymod.items.MoneyItem;
 import sk.dipo.moneymod.items.WalletItem;
 
@@ -28,5 +29,6 @@ public class ModItems {
     public static final RegistryObject<Item> EURO_500 = ITEMS.register("euro500", () -> new MoneyItem(new Item.Properties()));
 
     public static final RegistryObject<Item> WALLET = ITEMS.register("wallet", () -> new WalletItem(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+    public static final RegistryObject<Item> CREDIT_CARD = ITEMS.register("credit_card", () -> new CreditCardItem(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 
 }
