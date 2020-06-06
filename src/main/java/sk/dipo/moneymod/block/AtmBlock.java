@@ -1,6 +1,5 @@
 package sk.dipo.moneymod.block;
 
-import com.sun.istack.internal.NotNull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;

@@ -3,7 +3,6 @@ package sk.dipo.moneymod.init;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,5 +19,5 @@ public class ModPOITypes {
 
     public static final DeferredRegister<PointOfInterestType> POI_TYPES = new DeferredRegister<>(ForgeRegistries.POI_TYPES, MoneyMod.MODID);
 
-    public static RegistryObject<PointOfInterestType> ATM = POI_TYPES.register("exchanger", () -> new PointOfInterestType("exchanger", getAllStates(Blocks.DIAMOND_BLOCK), 1, 1));
+    public static RegistryObject<PointOfInterestType> ATM = POI_TYPES.register("exchanger", () -> new PointOfInterestType("exchanger", getAllStates(ModBlocks.ATM_BLOCK.get()), 1, 1));
 }

@@ -12,6 +12,6 @@ import sk.dipo.moneymod.block.AtmBlock;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, MoneyMod.MODID);
 
-    // TODO: Add correct Hardness / Resistance
-    public static final RegistryObject<Block> ATM = BLOCKS.register("atm", () -> new AtmBlock(Block.Properties.create(Material.ROCK, MaterialColor.QUARTZ)));
+    // TODO: Add crafting recipe, loot table
+    public static final RegistryObject<Block> ATM_BLOCK = BLOCKS.register("atm", () -> new AtmBlock(Block.Properties.create(Material.ROCK, MaterialColor.QUARTZ).hardnessAndResistance(0.8F)));
 }
