@@ -1,6 +1,7 @@
 package sk.dipo.moneymod.datagen;
 
 import net.minecraft.data.DataGenerator;
+import sk.dipo.moneymod.init.ModBlocks;
 
 public class LootTables extends BaseLootTableProvider {
 
@@ -10,6 +11,6 @@ public class LootTables extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-//        lootTables.put(Blocks.NETHERRACK, createStandardTable("NETHERRACK", Blocks.NETHERRACK));
+        lootTables.put(ModBlocks.ATM_BLOCK.get(), createStandardBlockTable("ATM", ModBlocks.ATM_BLOCK.get()));
     }
 }

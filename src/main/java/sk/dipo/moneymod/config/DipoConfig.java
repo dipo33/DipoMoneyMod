@@ -42,7 +42,7 @@ public class DipoConfig {
         ENTITIES.put(EntityType.ELDER_GUARDIAN, new Tuple<>(1000, 3000));
         ENTITIES.put(EntityType.ENDER_DRAGON, new Tuple<>(10000, 20000));
         ENTITIES.put(EntityType.ENDERMAN, new Tuple<>(15, 40));
-        ENTITIES.put(EntityType.ENDERMITE, new Tuple<>(1, 10)); // TODO fix this values
+        ENTITIES.put(EntityType.ENDERMITE, new Tuple<>(1, 10)); // FIXME: Fix this values
         ENTITIES.put(EntityType.EVOKER, new Tuple<>(300, 1000));
         ENTITIES.put(EntityType.FOX, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.GHAST, new Tuple<>(50, 100));
@@ -52,7 +52,7 @@ public class DipoConfig {
         ENTITIES.put(EntityType.HUSK, new Tuple<>(1, 10));
         ENTITIES.put(EntityType.ILLUSIONER, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.LLAMA, new Tuple<>(0, 0));
-        ENTITIES.put(EntityType.MAGMA_CUBE, new Tuple<>(1, 20));
+        ENTITIES.put(EntityType.MAGMA_CUBE, new Tuple<>(1, 20)); // TODO: Add rewards by size
         ENTITIES.put(EntityType.MULE, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.MOOSHROOM, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.OCELOT, new Tuple<>(0, 0));
@@ -69,7 +69,7 @@ public class DipoConfig {
         ENTITIES.put(EntityType.SILVERFISH, new Tuple<>(1, 10));
         ENTITIES.put(EntityType.SKELETON, new Tuple<>(5, 15));
         ENTITIES.put(EntityType.SKELETON_HORSE, new Tuple<>(30, 60));
-        ENTITIES.put(EntityType.SLIME, new Tuple<>(1, 5));
+        ENTITIES.put(EntityType.SLIME, new Tuple<>(1, 5)); // TODO: Add rewards by size
         ENTITIES.put(EntityType.SNOW_GOLEM, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.SPIDER, new Tuple<>(5, 15));
         ENTITIES.put(EntityType.SQUID, new Tuple<>(0, 0));
