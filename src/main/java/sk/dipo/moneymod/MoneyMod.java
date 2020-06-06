@@ -15,10 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sk.dipo.moneymod.capabilities.CapabilityHandler;
 import sk.dipo.moneymod.config.DipoConfig;
-import sk.dipo.moneymod.init.ModContainerTypes;
-import sk.dipo.moneymod.init.ModItems;
-import sk.dipo.moneymod.init.ModPOITypes;
-import sk.dipo.moneymod.init.ModVillagerProfessions;
+import sk.dipo.moneymod.init.*;
 
 @Mod(MoneyMod.MODID)
 public class MoneyMod {
@@ -42,6 +39,7 @@ public class MoneyMod {
 
         instance = this;
 
+        ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
         ModPOITypes.POI_TYPES.register(modEventBus);
