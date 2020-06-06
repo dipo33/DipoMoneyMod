@@ -1,10 +1,13 @@
 package sk.dipo.moneymod.datagen;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.init.ModBlocks;
 import sk.dipo.moneymod.init.ModItems;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
 public class Recipes extends RecipeProvider {
@@ -14,7 +17,11 @@ public class Recipes extends RecipeProvider {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        registerMoneyRecipes(consumer);
+
+        /* Wallet */
         ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get())
                 .patternLine(" S ")
                 .patternLine("LLL")
@@ -25,6 +32,21 @@ public class Recipes extends RecipeProvider {
                 .addCriterion("string", hasItem(Items.STRING))
                 .build(consumer);
 
+        /* ATM */
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.ATM_BLOCK.get())
+                .patternLine("QQQ")
+                .patternLine("QDQ")
+                .patternLine("QHQ")
+                .key('Q', Blocks.QUARTZ_BLOCK)
+                .key('D', Blocks.DROPPER)
+                .key('H', Blocks.HOPPER)
+                .addCriterion("quartz", hasItem(Items.QUARTZ))
+                .addCriterion("dropper", hasItem(Items.DROPPER))
+                .addCriterion("hopper", hasItem(Items.HOPPER))
+                .build(consumer);
+    }
+
+    private void registerMoneyRecipes(Consumer<IFinishedRecipe> consumer) {
         /* Smaller to bigger */
         ShapelessRecipeBuilder.shapelessRecipe(ModItems.EURO_500.get())
                 .addIngredient(ModItems.EURO_200.get(), 2)
