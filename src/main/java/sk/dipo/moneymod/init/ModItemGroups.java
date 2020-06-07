@@ -1,6 +1,5 @@
 package sk.dipo.moneymod.init;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import sk.dipo.moneymod.MoneyMod;
@@ -22,7 +21,6 @@ public class ModItemGroups {
         }
 
         @Override
-        @MethodsReturnNonnullByDefault
         public ItemStack createIcon() {
             return iconSupplier.get();
         }

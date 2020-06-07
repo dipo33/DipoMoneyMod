@@ -1,6 +1,5 @@
 package sk.dipo.moneymod.items;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -18,8 +17,6 @@ import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.container.WalletContainer;
 import sk.dipo.moneymod.init.ModContainerTypes;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 public class WalletItem extends Item {
 
     public WalletItem(Properties properties) {
@@ -29,8 +26,6 @@ public class WalletItem extends Item {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
-    @MethodsReturnNonnullByDefault
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (!worldIn.isRemote)
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new INamedContainerProvider() {

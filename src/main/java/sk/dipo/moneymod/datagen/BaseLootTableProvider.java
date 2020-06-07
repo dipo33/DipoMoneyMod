@@ -2,7 +2,6 @@ package sk.dipo.moneymod.datagen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -14,7 +13,6 @@ import net.minecraft.world.storage.loot.conditions.SurvivesExplosion;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -45,7 +43,6 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     public void act(DirectoryCache cache) {
         addTables();
 
@@ -69,7 +66,6 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
     }
 
     @Override
-    @MethodsReturnNonnullByDefault
     public String getName() {
         return "DipoMoneyMod LootTables";
     }

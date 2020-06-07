@@ -1,6 +1,5 @@
 package sk.dipo.moneymod.container;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
@@ -11,9 +10,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import sk.dipo.moneymod.init.ModContainerTypes;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 public class WalletContainer extends Container {
 
@@ -53,8 +49,6 @@ public class WalletContainer extends Container {
      * @return the {@link ItemStack}
      */
     @Override
-    @Nonnull
-    @ParametersAreNonnullByDefault
     public ItemStack transferStackInSlot(final PlayerEntity player, final int index) {
         ItemStack returnStack = ItemStack.EMPTY;
         final Slot slot = this.inventorySlots.get(index);
@@ -84,8 +78,6 @@ public class WalletContainer extends Container {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
-    @MethodsReturnNonnullByDefault
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         boolean isSlotOpenedWallet = isSlotOpenedWallet(slotId);
         ItemStack returnStack;
@@ -119,7 +111,6 @@ public class WalletContainer extends Container {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     public boolean canInteractWith(PlayerEntity playerIn) {
         return true;
     }

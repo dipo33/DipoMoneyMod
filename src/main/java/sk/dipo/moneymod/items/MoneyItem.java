@@ -3,6 +3,7 @@ package sk.dipo.moneymod.items;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import sk.dipo.moneymod.init.ModItemGroups;
 import sk.dipo.moneymod.init.ModItems;
@@ -61,7 +62,7 @@ public class MoneyItem extends Item {
                 return ModItems.EURO_500.get();
         }
 
-        return null;
+        return Items.AIR;
     }
 
     public static void addRandomMoneyDrop(LivingDropsEvent event, int low, int high) {

@@ -7,8 +7,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 public class AtmBlock extends HorizontalBlock {
 
     public AtmBlock(Properties properties) {
@@ -24,7 +22,6 @@ public class AtmBlock extends HorizontalBlock {
     }
 
     @Override
-    @ParametersAreNonnullByDefault
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(HORIZONTAL_FACING);

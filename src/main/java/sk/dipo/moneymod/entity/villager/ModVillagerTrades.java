@@ -43,7 +43,6 @@ public class ModVillagerTrades {
             this.priceMultiplier = 0.05F;
         }
 
-        @ParametersAreNonnullByDefault
         public MerchantOffer getOffer(Entity trader, Random rand) {
             return new MerchantOffer(sellStack, buyStack, this.maxUses, this.xpValue, this.priceMultiplier);
         }

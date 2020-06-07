@@ -6,6 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import sk.dipo.moneymod.capability.capability.CreditCardCap;
 import sk.dipo.moneymod.capability.capability.ICreditCard;
 
 import javax.annotation.Nonnull;
@@ -16,7 +17,7 @@ public class CreditCardProvider implements ICapabilitySerializable<INBT> {
     @CapabilityInject(ICreditCard.class)
     public static final Capability<ICreditCard> CREDIT_CARD_CAPABILITY = null;
 
-    private final ICreditCard INSTANCE = CREDIT_CARD_CAPABILITY.getDefaultInstance();
+    private final ICreditCard INSTANCE = new CreditCardCap();
 
     @Nonnull
     @Override
