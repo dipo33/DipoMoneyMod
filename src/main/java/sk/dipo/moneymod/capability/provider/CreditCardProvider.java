@@ -17,21 +17,22 @@ public class CreditCardProvider implements ICapabilitySerializable<INBT> {
     @CapabilityInject(ICreditCard.class)
     public static final Capability<ICreditCard> CREDIT_CARD_CAPABILITY = null;
 
-    private final ICreditCard INSTANCE = new CreditCardCap();
+    private final ICreditCard instance = new CreditCardCap();
+    private final LazyOptional<ICreditCard> lazyOptional = LazyOptional.of(() -> instance);
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return cap == CREDIT_CARD_CAPABILITY ? LazyOptional.of(() -> INSTANCE).cast() : LazyOptional.empty();
+        return cap == CREDIT_CARD_CAPABILITY ? lazyOptional.cast() : LazyOptional.empty();
     }
 
     @Override
     public INBT serializeNBT() {
-        return CREDIT_CARD_CAPABILITY.getStorage().writeNBT(CREDIT_CARD_CAPABILITY, this.INSTANCE, null);
+        return CREDIT_CARD_CAPABILITY.getStorage().writeNBT(CREDIT_CARD_CAPABILITY, this.instance, null);
     }
 
     @Override
     public void deserializeNBT(INBT nbt) {
-        CREDIT_CARD_CAPABILITY.getStorage().readNBT(CREDIT_CARD_CAPABILITY, this.INSTANCE, null, nbt);
+        CREDIT_CARD_CAPABILITY.getStorage().readNBT(CREDIT_CARD_CAPABILITY, this.instance, null, nbt);
     }
 }
