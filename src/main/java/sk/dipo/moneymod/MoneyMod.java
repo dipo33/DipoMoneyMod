@@ -15,8 +15,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sk.dipo.moneymod.capability.CapabilityHandler;
+import sk.dipo.moneymod.capability.capability.BankAccountCap;
 import sk.dipo.moneymod.capability.capability.CreditCardCap;
+import sk.dipo.moneymod.capability.capability.IBankAccount;
 import sk.dipo.moneymod.capability.capability.ICreditCard;
+import sk.dipo.moneymod.capability.storage.BankAccountStorage;
 import sk.dipo.moneymod.capability.storage.CreditCardStorage;
 import sk.dipo.moneymod.config.DipoConfig;
 import sk.dipo.moneymod.init.*;
@@ -56,6 +59,7 @@ public class MoneyMod {
         LOGGER.info("Pre-Init Started");
 
         CapabilityManager.INSTANCE.register(ICreditCard.class, new CreditCardStorage(), CreditCardCap::new);
+        CapabilityManager.INSTANCE.register(IBankAccount.class, new BankAccountStorage(), BankAccountCap::new);
 
         LOGGER.info("Pre-Init Finished");
     }
