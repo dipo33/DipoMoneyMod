@@ -46,17 +46,20 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
     @Override
     protected void init() {
         super.init();
-        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 25, 16, 16, "1"));
-        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 25, 16, 16, "2"));
-        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 25, 16, 16, "3"));
-        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 43, 16, 16, "4"));
-        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 43, 16, 16, "5"));
-        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 43, 16, 16, "6"));
-        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 61, 16, 16, "7"));
-        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 61, 16, 16, "8"));
-        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 61, 16, 16, "9"));
-        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 7, 16, 16, "0"));
-        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 7, 16, 16, "."));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 25, 16, 16, "1", 0));
+        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 25, 16, 16, "2", 0));
+        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 25, 16, 16, "3", 0));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 43, 16, 16, "4", 0));
+        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 43, 16, 16, "5", 0));
+        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 43, 16, 16, "6", 0));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 61, 16, 16, "7", 0));
+        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 61, 16, 16, "8", 0));
+        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 61, 16, 16, "9", 0));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 - 7, 16, 16, "0", 0));
+        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 7, 16, 16, ".", 0));
+        this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 7, 16, 16, "C", 1));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B06), 2));
+        this.addButton(new AtmButton(this.width / 2 + 124, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B07), 3));
     }
 
     @Override

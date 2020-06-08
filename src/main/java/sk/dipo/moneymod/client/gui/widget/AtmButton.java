@@ -15,12 +15,14 @@ public class AtmButton extends Button {
     private static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation(MoneyMod.MODID,
             "textures/gui/container/atm.png");
 
+    private final int offset;
     private boolean isClicked = false;
 
-    public AtmButton(int widthIn, int heightIn, int width, int height, String text) {
+    public AtmButton(int widthIn, int heightIn, int width, int height, String text, int buttonType) {
         super(widthIn, heightIn, width, height, text, (button) -> {
             LogManager.getLogger().debug(text);
         });
+        this.offset = getButtonOffset(buttonType);
     }
 
     @Override
@@ -34,7 +36,7 @@ public class AtmButton extends Button {
         RenderSystem.defaultBlendFunc();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-        this.blit(this.x, this.y, 16 * getState(), 225, this.width, this.height);
+        this.blit(this.x, this.y, this.width * getState() + this.offset, 225, this.width, this.height);
         this.renderBg(minecraft, p_renderButton_1_, p_renderButton_2_);
         int j = getFGColor();
         this.drawCenteredString(fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
@@ -58,6 +60,22 @@ public class AtmButton extends Button {
                 return 0;
             else
                 return 2;
+        isClicked = false;
         return 1;
+    }
+
+    private int getButtonOffset(int buttonType) {
+        switch (buttonType) {
+            case 0:
+                return 0;
+            case 1:
+                return 48;
+            case 2:
+                return 96;
+            case 3:
+                return 165;
+        }
+
+        return 0;
     }
 }
