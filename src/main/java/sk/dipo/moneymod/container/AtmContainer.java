@@ -32,7 +32,7 @@ public class AtmContainer extends Container {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 for (int k = 0; k < 9; k++) {
-                    this.addSlot(new SlotItemHandler(tileEntity.INVENTORY, i * 18 + j * 9 + k, k * 18 + 42, i * 50 + j * 18 + 40));
+                    this.addSlot(new SlotItemHandler(tileEntity.inventory, i * 18 + j * 9 + k, k * 18 + 42, i * 50 + j * 18 + 40));
                 }
             }
         }

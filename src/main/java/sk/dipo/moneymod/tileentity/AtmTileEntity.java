@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 
 public class AtmTileEntity extends TileEntity implements INamedContainerProvider {
 
-    public final ItemStackHandler INVENTORY = new ItemStackHandler(36) {
+    public final ItemStackHandler inventory = new ItemStackHandler(36) {
         @Override
         public boolean isItemValid(final int slot, @Nonnull final ItemStack stack) {
             if (slot >= 0 && slot < 18)
