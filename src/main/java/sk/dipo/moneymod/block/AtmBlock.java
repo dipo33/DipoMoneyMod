@@ -57,16 +57,6 @@ public class AtmBlock extends HorizontalBlock {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            final TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof AtmTileEntity)
-                NetworkHooks.openGui((ServerPlayerEntity) player, (AtmTileEntity) tileEntity, pos);
-        }
-        return ActionResultType.SUCCESS;
-    }
-
-    @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
