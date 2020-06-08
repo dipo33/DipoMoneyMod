@@ -46,6 +46,7 @@ public class MoneyMod {
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        ModTileEntityTypes.TILE_ENTITY_TYPES.register(modEventBus);
         ModPOITypes.POI_TYPES.register(modEventBus);
         ModVillagerProfessions.PROFESSIONS.register(modEventBus);
     }

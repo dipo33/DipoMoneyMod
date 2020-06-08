@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.client.gui.AtmScreen;
 import sk.dipo.moneymod.client.gui.WalletScreen;
 import sk.dipo.moneymod.init.ModContainerTypes;
 
@@ -40,6 +41,7 @@ public class ClientModEventSubscriber {
         // ScreenManager.registerFactory is not safe to call during parallel mod loading so we queue it to run later
         DeferredWorkQueue.runLater(() -> {
             ScreenManager.registerFactory(ModContainerTypes.WALLET.get(), WalletScreen::new);
+            ScreenManager.registerFactory(ModContainerTypes.ATM.get(), AtmScreen::new);
             LOGGER.debug("Registered ContainerType Screens");
         });
 

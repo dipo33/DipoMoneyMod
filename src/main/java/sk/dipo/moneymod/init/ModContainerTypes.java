@@ -7,6 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.WalletContainer;
 
 public class ModContainerTypes {
@@ -17,4 +18,6 @@ public class ModContainerTypes {
         Hand hand = data.readEnumValue(Hand.class);
         return new WalletContainer(windowId, inv, inv.player.getHeldItem(hand));
     }));
+
+    public static final RegistryObject<ContainerType<AtmContainer>> ATM = CONTAINER_TYPES.register("atm", () -> IForgeContainerType.create(AtmContainer::new));
 }
