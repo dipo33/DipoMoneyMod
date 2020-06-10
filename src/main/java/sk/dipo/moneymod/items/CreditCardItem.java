@@ -27,9 +27,16 @@ public class CreditCardItem extends Item {
             return super.onItemUse(context);
 
         TileEntity tileEntity = context.getWorld().getTileEntity(context.getPos());
-        if (tileEntity instanceof AtmTileEntity)
+        if (tileEntity instanceof AtmTileEntity) {
             // TODO: Only if is openable
-            NetworkHooks.openGui((ServerPlayerEntity) Objects.requireNonNull(context.getPlayer()), (AtmTileEntity) tileEntity, context.getPos());
+            AtmTileEntity atmTileEntity = (AtmTileEntity) tileEntity;
+            atmTileEntity.creditCard = context.getItem();
+            NetworkHooks.openGui((ServerPlayerEntity) Objects.requireNonNull(context.getPlayer()), atmTileEntity, packet -> {
+                        packet.writeBlockPos(context.getPos());
+                        packet.writeByte(context.getHand().ordinal());
+                    }
+            );
+        }
 
         return ActionResultType.SUCCESS;
     }

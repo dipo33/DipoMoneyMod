@@ -35,6 +35,8 @@ public class AtmTileEntity extends TileEntity implements INamedContainerProvider
         }
     };
 
+    public ItemStack creditCard = ItemStack.EMPTY;
+
     public AtmTileEntity() {
         super(ModTileEntityTypes.ATM.get());
     }

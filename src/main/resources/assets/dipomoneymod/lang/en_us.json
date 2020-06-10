@@ -20,6 +20,10 @@
 	"block.dipomoneymod.atm": "ATM Machine",
 
 	"container.dipomoneymod.wallet":  "Wallet",
+	"container.dipomoneymod.atm_in": "ATM Input",
+	"container.dipomoneymod.atm_out": "ATM Output",
+	"container.dipomoneymod.card_not_signed": "Your credit card is not signed! Do you want to sign it ? (Confirm with the green button)",
+	"container.dipomoneymod.atm_login": "Welcome @s! Enter your PIN to continue. (Confirm with the green button)",
 
 	"entity.minecraft.villager.dipomoneymod.exchanger":  "Exchanger",
 

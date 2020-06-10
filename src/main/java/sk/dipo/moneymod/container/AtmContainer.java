@@ -7,6 +7,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.items.SlotItemHandler;
 import sk.dipo.moneymod.init.ModBlocks;
@@ -95,8 +96,10 @@ public class AtmContainer extends Container {
         Objects.requireNonNull(playerInventory, "PlayerInventory is null");
         Objects.requireNonNull(data, "Data is null");
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof AtmTileEntity)
+        if (tileAtPos instanceof AtmTileEntity) {
+            ((AtmTileEntity) tileAtPos).creditCard = playerInventory.player.getHeldItem(data.readEnumValue(Hand.class));
             return (AtmTileEntity) tileAtPos;
+        }
         throw new IllegalStateException("Tile entity is not correct - " + tileAtPos);
     }
 }

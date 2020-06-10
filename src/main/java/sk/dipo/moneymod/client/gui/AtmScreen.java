@@ -5,18 +5,32 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import sk.dipo.moneymod.MoneyMod;
 import sk.dipo.moneymod.client.gui.widget.AtmButton;
 import sk.dipo.moneymod.container.AtmContainer;
+import sk.dipo.moneymod.container.ContainerHelper;
 
 public class AtmScreen extends ContainerScreen<AtmContainer> {
 
     private static final ResourceLocation GUI = new ResourceLocation(MoneyMod.MODID, "textures/gui/container/atm.png");
 
+//    private final ICreditCard capability;
+    public String displayPIN = " *  *  *  * ";
+    public String displayMain = "Jelito kopyto plati to hihi";
+
     public AtmScreen(AtmContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
         this.xSize = 243;
         this.ySize = 222;
+//        capability = playerInventory.player.getHeldItem(Hand.MAIN_HAND).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
+//                () -> new NullPointerException("Null CreditCard capability")
+//        );
+//        if (capability.hasOwner()) {
+//            displayMain = ContainerHelper.getUnlocalizedText("atm_login");
+//        } else {
+//            displayMain = ContainerHelper.getUnlocalizedText("card_not_signed");
+//        }
     }
 
     @Override
@@ -30,6 +44,10 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         this.font.drawString(this.title.getFormattedText(), 42.0F, 5.0F, 0x404040);
         this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
+        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
+        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
+        this.font.drawString(new TranslationTextComponent(displayMain).getFormattedText(), 44, 17, 16777215);
+        this.font.drawString(displayPIN, 219, 27, 16777215);
     }
 
     @Override
