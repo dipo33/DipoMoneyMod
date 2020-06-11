@@ -3,12 +3,12 @@ package sk.dipo.moneymod.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import sk.dipo.moneymod.MoneyMod;
 import sk.dipo.moneymod.client.gui.widget.AtmButton;
+import sk.dipo.moneymod.client.gui.widget.AtmTextComponent;
 import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.network.ModPacketHandler;
@@ -18,11 +18,14 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
 
     private static final ResourceLocation GUI = new ResourceLocation(MoneyMod.MODID, "textures/gui/container/atm.png");
 
-    public String displayPIN = " *  *  *  * ";
-    public String displayMain = "Jelito kopyto plati to hihi";
+    private String displayPIN = " *  *  *  * ";
+    public AtmTextComponent displayMain;
+
+
 
     public AtmScreen(AtmContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
+        this.displayMain = new AtmTextComponent(ContainerHelper.getUnlocalizedText("loading"));
         this.xSize = 243;
         this.ySize = 222;
         ModPacketHandler.INSTANCE.sendToServer(new AtmInitSessionMsg(this.getContainer().tileEntity.hand));
@@ -41,7 +44,7 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
         this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
         this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
-        this.font.drawString(new TranslationTextComponent(displayMain).getFormattedText(), 44, 17, 16777215);
+        this.font.drawString(displayMain.getFormattedText(), 44, 17, 16777215);
         this.font.drawString(displayPIN, 219, 27, 16777215);
     }
 
@@ -73,5 +76,11 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 7, 16, 16, "C", 1));
         this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B06), 2));
         this.addButton(new AtmButton(this.width / 2 + 124, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B07), 3));
+    }
+
+    @Override
+    public void removed() {
+        super.removed();
+        this.displayMain.stopThread();
     }
 }

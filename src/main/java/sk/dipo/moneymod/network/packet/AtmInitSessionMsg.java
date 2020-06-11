@@ -4,10 +4,12 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import sk.dipo.moneymod.capability.capability.ICreditCard;
 import sk.dipo.moneymod.capability.provider.CreditCardProvider;
 import sk.dipo.moneymod.network.ModPacketHandler;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class AtmInitSessionMsg {
@@ -28,11 +30,15 @@ public class AtmInitSessionMsg {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            final ICreditCard cap = ctx.get().getSender().getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
+            final ICreditCard cap = Objects.requireNonNull(ctx.get().getSender()).getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
                     () -> new NullPointerException("Null CreditCard capability")
             );
 
-            ModPacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> ctx.get().getSender()), new AtmCardSignedMsg(cap.hasOwner()));
+            ModPacketHandler.INSTANCE.send(
+                    PacketDistributor.PLAYER.with(() -> ctx.get().getSender()),
+                    new AtmCardSignedMsg(cap.hasOwner(),
+                            Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByUUID(cap.getOwner())).getDisplayName().toString())
+            );
         });
         ctx.get().setPacketHandled(true);
     }
