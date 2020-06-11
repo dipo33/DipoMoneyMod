@@ -33,11 +33,12 @@ public class AtmInitSessionMsg {
             final ICreditCard cap = Objects.requireNonNull(ctx.get().getSender()).getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
                     () -> new NullPointerException("Null CreditCard capability")
             );
+            final String name = cap.hasOwner() ? Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList()
+                    .getPlayerByUUID(cap.getOwner())).getDisplayName().toString() : "";
 
             ModPacketHandler.INSTANCE.send(
                     PacketDistributor.PLAYER.with(() -> ctx.get().getSender()),
-                    new AtmCardSignedMsg(cap.hasOwner(),
-                            Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByUUID(cap.getOwner())).getDisplayName().toString())
+                    new AtmCardSignedMsg(cap.hasOwner(), name)
             );
         });
         ctx.get().setPacketHandled(true);

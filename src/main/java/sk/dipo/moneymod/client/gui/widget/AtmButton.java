@@ -18,10 +18,8 @@ public class AtmButton extends Button {
     private final int offset;
     private boolean isClicked = false;
 
-    public AtmButton(int widthIn, int heightIn, int width, int height, String text, int buttonType) {
-        super(widthIn, heightIn, width, height, text, (button) -> {
-            LogManager.getLogger().debug(text);
-        });
+    public AtmButton(int widthIn, int heightIn, int width, int height, String text, int buttonType, Button.IPressable onPress) {
+        super(widthIn, heightIn, width, height, text, onPress);
         this.offset = getButtonOffset(buttonType);
     }
 
@@ -64,7 +62,7 @@ public class AtmButton extends Button {
         return 1;
     }
 
-    private int getButtonOffset(int buttonType) {
+    private static int getButtonOffset(int buttonType) {
         switch (buttonType) {
             case 0:
                 return 0;

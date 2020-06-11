@@ -35,6 +35,7 @@ public class AtmCardSignedMsg {
             if (screen instanceof AtmScreen) {
                 AtmScreen atmScreen = (AtmScreen) screen;
                 atmScreen.displayMain.stopThread();
+                atmScreen.keyPadMode = cardSigned ? AtmScreen.KeyPadMode.Login : AtmScreen.KeyPadMode.SetPin;
                 if (cardSigned)
                     atmScreen.displayMain = new AtmTextComponent(
                             ContainerHelper.getUnlocalizedText("atm_login"),
