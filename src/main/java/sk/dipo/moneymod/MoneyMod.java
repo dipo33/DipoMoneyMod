@@ -23,6 +23,7 @@ import sk.dipo.moneymod.capability.storage.BankAccountStorage;
 import sk.dipo.moneymod.capability.storage.CreditCardStorage;
 import sk.dipo.moneymod.config.DipoConfig;
 import sk.dipo.moneymod.init.*;
+import sk.dipo.moneymod.network.ModPacketHandler;
 
 @Mod(MoneyMod.MODID)
 public class MoneyMod {
@@ -36,7 +37,6 @@ public class MoneyMod {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
-        modEventBus.addListener(this::init);
         modEventBus.addListener(this::doClientStuff);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DipoConfig.CLIENT_SPEC);
@@ -58,19 +58,18 @@ public class MoneyMod {
         // Pre-Init Code
         LOGGER.info("Pre-Init Started");
 
+        PointOfInterestType.registerBlockStates(ModPOITypes.ATM.get());
+
         CapabilityManager.INSTANCE.register(ICreditCard.class, new CreditCardStorage(), CreditCardCap::new);
         CapabilityManager.INSTANCE.register(IBankAccount.class, new BankAccountStorage(), BankAccountCap::new);
+
+        ModPacketHandler.registerMessages();
 
         LOGGER.info("Pre-Init Finished");
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // Client-Only Code
-    }
-
-    private void init(final FMLCommonSetupEvent event) {
-        // Server-Side Code
-        PointOfInterestType.registerBlockStates(ModPOITypes.ATM.get());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

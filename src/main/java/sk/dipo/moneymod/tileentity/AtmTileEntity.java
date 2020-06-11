@@ -6,6 +6,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
@@ -18,6 +19,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class AtmTileEntity extends TileEntity implements INamedContainerProvider {
+
+    public Hand hand;
 
     public final ItemStackHandler inventory = new ItemStackHandler(36) {
         @Override
@@ -34,8 +37,6 @@ public class AtmTileEntity extends TileEntity implements INamedContainerProvider
             markDirty();
         }
     };
-
-    public ItemStack creditCard = ItemStack.EMPTY;
 
     public AtmTileEntity() {
         super(ModTileEntityTypes.ATM.get());

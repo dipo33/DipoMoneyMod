@@ -97,7 +97,7 @@ public class AtmContainer extends Container {
         Objects.requireNonNull(data, "Data is null");
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
         if (tileAtPos instanceof AtmTileEntity) {
-            ((AtmTileEntity) tileAtPos).creditCard = playerInventory.player.getHeldItem(data.readEnumValue(Hand.class));
+            ((AtmTileEntity) tileAtPos).hand = data.readEnumValue(Hand.class);
             return (AtmTileEntity) tileAtPos;
         }
         throw new IllegalStateException("Tile entity is not correct - " + tileAtPos);

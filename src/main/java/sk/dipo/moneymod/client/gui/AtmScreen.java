@@ -3,6 +3,7 @@ package sk.dipo.moneymod.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -10,12 +11,13 @@ import sk.dipo.moneymod.MoneyMod;
 import sk.dipo.moneymod.client.gui.widget.AtmButton;
 import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.ContainerHelper;
+import sk.dipo.moneymod.network.ModPacketHandler;
+import sk.dipo.moneymod.network.packet.AtmInitSessionMsg;
 
 public class AtmScreen extends ContainerScreen<AtmContainer> {
 
     private static final ResourceLocation GUI = new ResourceLocation(MoneyMod.MODID, "textures/gui/container/atm.png");
 
-//    private final ICreditCard capability;
     public String displayPIN = " *  *  *  * ";
     public String displayMain = "Jelito kopyto plati to hihi";
 
@@ -23,14 +25,7 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         super(container, inv, name);
         this.xSize = 243;
         this.ySize = 222;
-//        capability = playerInventory.player.getHeldItem(Hand.MAIN_HAND).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
-//                () -> new NullPointerException("Null CreditCard capability")
-//        );
-//        if (capability.hasOwner()) {
-//            displayMain = ContainerHelper.getUnlocalizedText("atm_login");
-//        } else {
-//            displayMain = ContainerHelper.getUnlocalizedText("card_not_signed");
-//        }
+        ModPacketHandler.INSTANCE.sendToServer(new AtmInitSessionMsg(this.getContainer().tileEntity.hand));
     }
 
     @Override

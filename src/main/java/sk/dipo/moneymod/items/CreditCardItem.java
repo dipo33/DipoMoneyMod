@@ -30,7 +30,7 @@ public class CreditCardItem extends Item {
         if (tileEntity instanceof AtmTileEntity) {
             // TODO: Only if is openable
             AtmTileEntity atmTileEntity = (AtmTileEntity) tileEntity;
-            atmTileEntity.creditCard = context.getItem();
+            atmTileEntity.hand = context.getHand();
             NetworkHooks.openGui((ServerPlayerEntity) Objects.requireNonNull(context.getPlayer()), atmTileEntity, packet -> {
                         packet.writeBlockPos(context.getPos());
                         packet.writeByte(context.getHand().ordinal());
