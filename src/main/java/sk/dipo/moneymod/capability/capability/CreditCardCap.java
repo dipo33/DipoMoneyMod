@@ -19,7 +19,7 @@ public class CreditCardCap implements ICreditCard {
     }
 
     @Override
-    public void addOwner(UUID owner) {
+    public void newOwner(UUID owner) {
         setOwner(owner);
         hasOwner = true;
     }

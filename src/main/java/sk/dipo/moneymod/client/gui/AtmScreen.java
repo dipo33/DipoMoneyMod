@@ -17,6 +17,7 @@ import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.network.ModPacketHandler;
 import sk.dipo.moneymod.network.packet.AtmInitSessionMsg;
+import sk.dipo.moneymod.network.packet.AtmSignCardMsg;
 
 public class AtmScreen extends ContainerScreen<AtmContainer> {
 
@@ -74,6 +75,15 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
             }
             LogManager.getLogger().debug("text");
         };
+        Button.IPressable onConfirm = (button) -> {
+            switch (keyPadMode) {
+                case SetPin:
+                    if (displayPIN.isPinFull())
+                        ModPacketHandler.INSTANCE.sendToServer(new AtmSignCardMsg(this.getContainer().tileEntity.hand, displayPIN.getPinCode()));
+                    break;
+            }
+            LogManager.getLogger().debug("text");
+        };
 
         this.addButton(new AtmNumericButton(this.width / 2 + 95, this.height / 2 - 25, 16, 16, 1, onPressNum));
         this.addButton(new AtmNumericButton(this.width / 2 + 113, this.height / 2 - 25, 16, 16, 2, onPressNum));
@@ -87,7 +97,7 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.addButton(new AtmNumericButton(this.width / 2 + 95, this.height / 2 - 7, 16, 16, 0, onPressNum));
         this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 7, 16, 16, ".", 0, onPressNum));
         this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 7, 16, 16, "C", 1, onPressNum));
-        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B06), 2, onPressNum));
+        this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B06), 2, onConfirm));
         this.addButton(new AtmButton(this.width / 2 + 124, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B07), 3, onPressNum));
     }
 

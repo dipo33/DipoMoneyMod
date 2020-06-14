@@ -55,6 +55,7 @@ public class AtmTextComponent extends Thread {
     }
 
     private String applyFormats(String text) {
+        text = text.replaceAll("@s", "%s");
         for (String format : formats) {
             text = String.format(text, format);
         }

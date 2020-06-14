@@ -1,6 +1,7 @@
 package sk.dipo.moneymod.client.gui.widget;
 
 public class AtmPinTextComponent {
+
     private String pinCode = "";
     private String text = "";
 
@@ -15,5 +16,12 @@ public class AtmPinTextComponent {
 
     public String getFormattedText() {
         return text;
+    }
+
+    public boolean isPinFull() {
+        return this.pinCode.length() == 4;
+    }
+    public String getPinCode() {
+        return pinCode;
     }
 }

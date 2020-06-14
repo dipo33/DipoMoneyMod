@@ -8,7 +8,7 @@ public interface ICreditCard {
 
     void setHasOwner(boolean hasOwner);
 
-    void addOwner(UUID owner);
+    void newOwner(UUID owner);
 
     UUID getOwner();
 
