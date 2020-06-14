@@ -8,7 +8,6 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import sk.dipo.moneymod.capability.capability.ICreditCard;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class CreditCardStorage implements IStorage<ICreditCard> {
 
@@ -17,7 +16,7 @@ public class CreditCardStorage implements IStorage<ICreditCard> {
     public INBT writeNBT(Capability<ICreditCard> capability, ICreditCard instance, Direction side) {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putBoolean("HasOwner", instance.hasOwner());
-        nbt.putString("Owner", instance.getOwner().toString());
+        nbt.putUniqueId("Owner", instance.getOwner());
         nbt.putString("PIN", instance.getPin());
         return nbt;
     }
@@ -26,7 +25,7 @@ public class CreditCardStorage implements IStorage<ICreditCard> {
     public void readNBT(Capability<ICreditCard> capability, ICreditCard instance, Direction side, INBT nbt) {
         CompoundNBT compoundNBT = (CompoundNBT) nbt;
         instance.setHasOwner(compoundNBT.getBoolean("HasOwner"));
-        instance.setOwner(UUID.fromString(compoundNBT.getString("Owner")));
+        instance.setOwner(compoundNBT.getUniqueId("Owner"));
         instance.setPin(compoundNBT.getString("PIN"));
     }
 }

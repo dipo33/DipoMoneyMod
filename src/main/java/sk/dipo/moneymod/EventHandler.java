@@ -1,9 +1,11 @@
 package sk.dipo.moneymod;
 
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Tuple;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -17,6 +19,7 @@ import sk.dipo.moneymod.entity.villager.ModVillagerTrades;
 import sk.dipo.moneymod.init.ModItems;
 import sk.dipo.moneymod.init.ModVillagerProfessions;
 import sk.dipo.moneymod.items.MoneyItem;
+import sk.dipo.moneymod.world.AccountWorldSavedData;
 
 import java.util.List;
 
@@ -65,5 +68,17 @@ public class EventHandler {
                     event.getTrades().put(i, trades);
             }
         }
+    }/*
+     */
+
+    @SubscribeEvent
+    public static void onPlayerJoin(EntityJoinWorldEvent event) {
+        if (event.getWorld().isRemote)
+            return;
+        if (!(event.getEntity() instanceof PlayerEntity))
+            return;
+
+        final PlayerEntity player = (PlayerEntity) event.getEntity();
+        AccountWorldSavedData.get(event.getWorld()).createAccount(player.getUniqueID(), player.getGameProfile().getName());
     }
 }

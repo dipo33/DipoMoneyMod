@@ -4,7 +4,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import sk.dipo.moneymod.world.AccountWorldSavedData;
 import sk.dipo.moneymod.capability.capability.ICreditCard;
 import sk.dipo.moneymod.capability.provider.CreditCardProvider;
 import sk.dipo.moneymod.network.ModPacketHandler;
@@ -33,8 +33,7 @@ public class AtmInitSessionMsg {
             final ICreditCard cap = Objects.requireNonNull(ctx.get().getSender()).getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
                     () -> new NullPointerException("Null CreditCard capability")
             );
-            final String name = cap.hasOwner() ? Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList()
-                    .getPlayerByUUID(cap.getOwner())).getGameProfile().getName() : "";
+            final String name = cap.hasOwner() ? AccountWorldSavedData.get(Objects.requireNonNull(ctx.get().getSender()).getServerWorld()).getPlayerName(cap.getOwner()) : "";
 
             ModPacketHandler.INSTANCE.send(
                     PacketDistributor.PLAYER.with(() -> ctx.get().getSender()),
