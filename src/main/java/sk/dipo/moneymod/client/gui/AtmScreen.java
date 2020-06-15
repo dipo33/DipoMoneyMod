@@ -17,9 +17,9 @@ import sk.dipo.moneymod.client.gui.widget.AtmTextComponent;
 import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.network.ModPacketHandler;
-import sk.dipo.moneymod.network.packet.AtmInitSessionMsg;
-import sk.dipo.moneymod.network.packet.AtmLoginMsg;
-import sk.dipo.moneymod.network.packet.AtmSignCardMsg;
+import sk.dipo.moneymod.network.packet.server.AtmInitSessionMsg;
+import sk.dipo.moneymod.network.packet.server.AtmLoginMsg;
+import sk.dipo.moneymod.network.packet.server.AtmSignCardMsg;
 
 public class AtmScreen extends ContainerScreen<AtmContainer> {
 

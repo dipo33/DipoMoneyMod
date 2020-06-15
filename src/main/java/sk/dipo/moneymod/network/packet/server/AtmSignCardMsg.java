@@ -1,4 +1,4 @@
-package sk.dipo.moneymod.network.packet;
+package sk.dipo.moneymod.network.packet.server;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
@@ -8,6 +8,8 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import sk.dipo.moneymod.capability.capability.ICreditCardInfo;
 import sk.dipo.moneymod.capability.provider.CreditCardProvider;
 import sk.dipo.moneymod.network.ModPacketHandler;
+import sk.dipo.moneymod.network.packet.client.AtmCardSignedMsg;
+import sk.dipo.moneymod.network.packet.client.AtmErrorMsg;
 import sk.dipo.moneymod.world.AccountWorldSavedData;
 
 import java.util.Objects;

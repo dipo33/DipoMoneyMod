@@ -1,4 +1,4 @@
-package sk.dipo.moneymod.network.packet;
+package sk.dipo.moneymod.network.packet.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -10,14 +10,20 @@ import sk.dipo.moneymod.container.ContainerHelper;
 
 import java.util.function.Supplier;
 
-public class AtmErrorMsg {
+public class AtmWrongPasswordMsg {
 
-    public void encode(PacketBuffer buffer) {
+    private final int attemptsLeft;
 
+    public AtmWrongPasswordMsg(int attemptsLeft) {
+        this.attemptsLeft = attemptsLeft;
     }
 
-    public static AtmErrorMsg decode(PacketBuffer buffer) {
-        return new AtmErrorMsg();
+    public void encode(PacketBuffer buffer) {
+        buffer.writeInt(attemptsLeft);
+    }
+
+    public static AtmWrongPasswordMsg decode(PacketBuffer buffer) {
+        return new AtmWrongPasswordMsg(buffer.readInt());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -25,10 +31,11 @@ public class AtmErrorMsg {
             final Screen screen = Minecraft.getInstance().currentScreen;
             if (screen instanceof AtmScreen) {
                 AtmScreen atmScreen = (AtmScreen) screen;
-                atmScreen.keyPadMode = AtmScreen.KeyPadMode.KeyPadOff;
+                atmScreen.keyPadMode = AtmScreen.KeyPadMode.Login;
                 atmScreen.displayPIN.clear();
                 atmScreen.displayMain = new AtmTextComponent(
-                        ContainerHelper.getUnlocalizedText("atm_error")
+                        ContainerHelper.getUnlocalizedText("atm_wrong_password"),
+                        this.attemptsLeft
                 );
             }
         });

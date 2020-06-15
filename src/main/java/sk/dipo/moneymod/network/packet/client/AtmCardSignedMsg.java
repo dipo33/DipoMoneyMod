@@ -1,4 +1,4 @@
-package sk.dipo.moneymod.network.packet;
+package sk.dipo.moneymod.network.packet.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;

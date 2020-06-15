@@ -4,7 +4,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import sk.dipo.moneymod.MoneyMod;
-import sk.dipo.moneymod.network.packet.*;
+import sk.dipo.moneymod.network.packet.client.AtmBalanceMsg;
+import sk.dipo.moneymod.network.packet.client.AtmCardSignedMsg;
+import sk.dipo.moneymod.network.packet.client.AtmErrorMsg;
+import sk.dipo.moneymod.network.packet.client.AtmWrongPasswordMsg;
+import sk.dipo.moneymod.network.packet.server.AtmInitSessionMsg;
+import sk.dipo.moneymod.network.packet.server.AtmLoginMsg;
+import sk.dipo.moneymod.network.packet.server.AtmSignCardMsg;
 
 public class ModPacketHandler {
 
