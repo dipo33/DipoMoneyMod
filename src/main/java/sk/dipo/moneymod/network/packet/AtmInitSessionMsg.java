@@ -1,5 +1,6 @@
 package sk.dipo.moneymod.network.packet;
 
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -21,7 +22,7 @@ public class AtmInitSessionMsg {
     }
 
     public void encode(PacketBuffer buffer) {
-        buffer.writeInt(hand.ordinal());
+        buffer.writeEnumValue(hand);
     }
 
     public static AtmInitSessionMsg decode(PacketBuffer buffer) {
@@ -30,13 +31,14 @@ public class AtmInitSessionMsg {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            final ICreditCardInfo cap = Objects.requireNonNull(ctx.get().getSender()).getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
+            final ServerPlayerEntity sender = Objects.requireNonNull(ctx.get().getSender());
+            final ICreditCardInfo cap = sender.getHeldItem(this.hand).getCapability(CreditCardProvider.CREDIT_CARD_CAPABILITY).orElseThrow(
                     () -> new NullPointerException("Null CreditCard capability")
             );
-            final String name = cap.hasOwner() ? AccountWorldSavedData.get(Objects.requireNonNull(ctx.get().getSender()).getServerWorld()).getPlayerName(cap.getOwner()) : "";
+            final String name = cap.hasOwner() ? AccountWorldSavedData.get(sender.getServerWorld()).getPlayerName(cap.getOwner()) : "";
 
             ModPacketHandler.INSTANCE.send(
-                    PacketDistributor.PLAYER.with(() -> ctx.get().getSender()),
+                    PacketDistributor.PLAYER.with(() -> sender),
                     new AtmCardSignedMsg(cap.hasOwner(), name)
             );
         });

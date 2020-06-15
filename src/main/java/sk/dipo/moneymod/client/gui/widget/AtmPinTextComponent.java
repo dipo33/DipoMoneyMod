@@ -21,7 +21,13 @@ public class AtmPinTextComponent {
     public boolean isPinFull() {
         return this.pinCode.length() == 4;
     }
+
     public String getPinCode() {
         return pinCode;
+    }
+
+    public void clear() {
+        this.pinCode = "";
+        this.text = "";
     }
 }

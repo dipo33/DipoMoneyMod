@@ -25,6 +25,9 @@
 	"container.dipomoneymod.loading": "Loading...",
 	"container.dipomoneymod.card_not_signed": "Your credit card is not signed, set your new PIN code! (Confirm with the green button)",
 	"container.dipomoneymod.atm_login": "Welcome @s! Enter your PIN to continue. (Confirm with the green button)",
+	"container.dipomoneymod.atm_balance": "Your balance: @s€",
+	"container.dipomoneymod.atm_wrong_password": "Your PIN code wasn't correct. Pay attention, you have only @s attempts. (Confirm with the green button)",
+	"container.dipomoneymod.atm_error": "An error occurred. Please close ATM and try again later!",
 
 	"entity.minecraft.villager.dipomoneymod.exchanger":  "Exchanger",
 

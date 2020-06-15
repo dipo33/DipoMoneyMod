@@ -13,12 +13,12 @@ import sk.dipo.moneymod.world.AccountWorldSavedData;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class AtmSignCardMsg {
+public class AtmLoginMsg {
 
     private final Hand hand;
     private final String pinCode;
 
-    public AtmSignCardMsg(Hand hand, String pinCode) {
+    public AtmLoginMsg(Hand hand, String pinCode) {
         this.hand = hand;
         this.pinCode = pinCode;
     }
@@ -28,8 +28,8 @@ public class AtmSignCardMsg {
         buffer.writeString(pinCode);
     }
 
-    public static AtmSignCardMsg decode(PacketBuffer buffer) {
-        return new AtmSignCardMsg(buffer.readEnumValue(Hand.class), buffer.readString());
+    public static AtmLoginMsg decode(PacketBuffer buffer) {
+        return new AtmLoginMsg(buffer.readEnumValue(Hand.class), buffer.readString());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -39,19 +39,26 @@ public class AtmSignCardMsg {
                     () -> new NullPointerException("Null CreditCard capability")
             );
 
-            if (cap.hasOwner()) {
+            if (!cap.hasOwner()) {
                 ModPacketHandler.INSTANCE.send(
                         PacketDistributor.PLAYER.with(() -> sender), new AtmErrorMsg()
                 );
                 return;
             }
 
-            cap.init(sender.getGameProfile().getId(), Objects.requireNonNull(ctx.get().getSender()).getServerWorld());
-            AccountWorldSavedData.get(sender.getServerWorld()).setCardPIN(cap.getCardNumber(), this.pinCode);
-            ModPacketHandler.INSTANCE.send(
-                    PacketDistributor.PLAYER.with(() -> ctx.get().getSender()),
-                    new AtmCardSignedMsg(true, Objects.requireNonNull(ctx.get().getSender()).getGameProfile().getName())
-            );
+            AccountWorldSavedData accountData = AccountWorldSavedData.get(sender.getServerWorld());
+            String realPin = accountData.getCardPIN(cap.getCardNumber());
+            if (pinCode.equals(realPin)) {
+                ModPacketHandler.INSTANCE.send(
+                        PacketDistributor.PLAYER.with(() -> sender),
+                        new AtmBalanceMsg(accountData.getBalance(cap.getOwner()))
+                );
+            } else {
+                ModPacketHandler.INSTANCE.send(
+                        PacketDistributor.PLAYER.with(() -> sender),
+                        new AtmWrongPasswordMsg(3) // TODO: Real attempts
+                );
+            }
         });
         ctx.get().setPacketHandled(true);
     }
