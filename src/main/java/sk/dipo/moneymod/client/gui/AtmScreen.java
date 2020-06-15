@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.apache.logging.log4j.LogManager;
+import org.lwjgl.opengl.GL11;
 import sk.dipo.moneymod.MoneyMod;
 import sk.dipo.moneymod.client.gui.widget.AtmButton;
 import sk.dipo.moneymod.client.gui.widget.AtmNumericButton;
@@ -49,8 +50,16 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
         this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
         this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
-        this.font.drawString(displayMain.getFormattedText(), 44, 17, 16777215);
         this.font.drawString(displayPIN.getFormattedText(), 219, 27, 16777215);
+
+        final double scale = this.getMinecraft().getMainWindow().getGuiScaleFactor();
+        final double height = this.getMinecraft().getMainWindow().getFramebufferHeight();
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        GL11.glScissor((int) ((this.guiLeft + 34 + 10) * scale), (int) (height - (this.guiTop + 28) * scale),
+                (int) (156 * scale), (int) (14 * scale));
+        displayMain.tick();
+        this.font.drawString(displayMain.getFormattedText(), 44 - displayMain.getOffset(), 17, 16777215);
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
     @Override
@@ -105,12 +114,6 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
                 }));
         this.addButton(new AtmButton(this.width / 2 + 124, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B07), 3,
                 (button) -> this.onClose()));
-    }
-
-    @Override
-    public void removed() {
-        super.removed();
-        this.displayMain.stopThread();
     }
 
     public enum KeyPadMode {

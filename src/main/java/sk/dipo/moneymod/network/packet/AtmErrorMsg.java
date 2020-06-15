@@ -25,7 +25,6 @@ public class AtmErrorMsg {
             final Screen screen = Minecraft.getInstance().currentScreen;
             if (screen instanceof AtmScreen) {
                 AtmScreen atmScreen = (AtmScreen) screen;
-                atmScreen.displayMain.stopThread();
                 atmScreen.keyPadMode = AtmScreen.KeyPadMode.KeyPadOff;
                 atmScreen.displayPIN.clear();
                 atmScreen.displayMain = new AtmTextComponent(

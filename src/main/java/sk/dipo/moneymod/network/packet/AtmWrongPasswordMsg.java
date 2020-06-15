@@ -31,7 +31,6 @@ public class AtmWrongPasswordMsg {
             final Screen screen = Minecraft.getInstance().currentScreen;
             if (screen instanceof AtmScreen) {
                 AtmScreen atmScreen = (AtmScreen) screen;
-                atmScreen.displayMain.stopThread();
                 atmScreen.keyPadMode = AtmScreen.KeyPadMode.Login;
                 atmScreen.displayPIN.clear();
                 atmScreen.displayMain = new AtmTextComponent(

@@ -22,7 +22,7 @@
 	"container.dipomoneymod.wallet":  "Wallet",
 	"container.dipomoneymod.atm_in": "ATM Input",
 	"container.dipomoneymod.atm_out": "ATM Output",
-	"container.dipomoneymod.loading": "Loading...",
+	"container.dipomoneymod.loading": "",
 	"container.dipomoneymod.card_not_signed": "Your credit card is not signed, set your new PIN code! (Confirm with the green button)",
 	"container.dipomoneymod.atm_login": "Welcome @s! Enter your PIN to continue. (Confirm with the green button)",
 	"container.dipomoneymod.atm_balance": "Your balance: @s€",
