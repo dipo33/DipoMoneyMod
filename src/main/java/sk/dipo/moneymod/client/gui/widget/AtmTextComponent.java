@@ -22,6 +22,8 @@ public class AtmTextComponent {
                 formats.add((String) arg);
             else if (arg instanceof Integer)
                 formats.add(Integer.toString((Integer) arg));
+            else if (arg instanceof AtmBalanceTextComponent)
+                formats.add(arg.toString());
             else
                 throw new IllegalArgumentException("Invalid Type Of AtmTextComponent");
         }
