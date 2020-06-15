@@ -6,6 +6,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 import sk.dipo.moneymod.client.gui.AtmScreen;
 import sk.dipo.moneymod.client.gui.widget.AtmBalanceTextComponent;
+import sk.dipo.moneymod.client.gui.widget.AtmPinTextComponent;
 import sk.dipo.moneymod.client.gui.widget.AtmTextComponent;
 import sk.dipo.moneymod.container.ContainerHelper;
 
@@ -34,6 +35,7 @@ public class AtmBalanceMsg {
                 AtmScreen atmScreen = (AtmScreen) screen;
                 atmScreen.keyPadMode = AtmScreen.KeyPadMode.Balance;
                 atmScreen.displayPIN.clear();
+                atmScreen.displayPIN.setDisplayMode(AtmPinTextComponent.DisplayMode.Balance);
                 atmScreen.displayMain = new AtmTextComponent(
                         ContainerHelper.getUnlocalizedText("atm_balance"),
                         new AtmBalanceTextComponent(this.balance)

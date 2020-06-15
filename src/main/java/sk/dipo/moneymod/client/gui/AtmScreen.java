@@ -80,8 +80,10 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
             switch (keyPadMode) {
                 case SetPin:
                 case Login:
-                    displayPIN.appendDigit(((AtmNumericButton) button).value);
+                    displayPIN.appendPinDigit(((AtmNumericButton) button).value);
                     break;
+                case Balance:
+                    displayPIN.appendDigit(((AtmNumericButton) button).value);
             }
             LogManager.getLogger().debug("text");
         };
@@ -97,7 +99,11 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.addButton(new AtmNumericButton(this.width / 2 + 131, this.height / 2 - 61, 16, 16, 9, onPressNum));
         this.addButton(new AtmNumericButton(this.width / 2 + 95, this.height / 2 - 7, 16, 16, 0, onPressNum));
 
-        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 7, 16, 16, ".", 0, onPressNum));
+        this.addButton(new AtmButton(this.width / 2 + 113, this.height / 2 - 7, 16, 16, ".", 0,
+                (button) -> {
+                    if (keyPadMode == KeyPadMode.Balance)
+                        displayPIN.appendDot();
+                }));
         this.addButton(new AtmButton(this.width / 2 + 131, this.height / 2 - 7, 16, 16, "C", 1,
                 (button) -> displayPIN.clear()));
         this.addButton(new AtmButton(this.width / 2 + 95, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B06), 2,
