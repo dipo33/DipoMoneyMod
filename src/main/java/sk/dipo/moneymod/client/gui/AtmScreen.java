@@ -17,9 +17,7 @@ import sk.dipo.moneymod.client.gui.widget.AtmTextComponent;
 import sk.dipo.moneymod.container.AtmContainer;
 import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.network.ModPacketHandler;
-import sk.dipo.moneymod.network.packet.server.AtmInitSessionMsg;
-import sk.dipo.moneymod.network.packet.server.AtmLoginMsg;
-import sk.dipo.moneymod.network.packet.server.AtmSignCardMsg;
+import sk.dipo.moneymod.network.packet.server.*;
 
 public class AtmScreen extends ContainerScreen<AtmContainer> {
 
@@ -84,6 +82,7 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
                     break;
                 case Balance:
                     displayPIN.appendDigit(((AtmNumericButton) button).value);
+                    break;
             }
             LogManager.getLogger().debug("text");
         };
@@ -116,10 +115,19 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
                         case Login:
                             if (displayPIN.isPinFull())
                                 ModPacketHandler.INSTANCE.sendToServer(new AtmLoginMsg(this.getContainer().tileEntity.hand, displayPIN.getPinCode()));
+                            break;
+                        case Balance:
+                            ModPacketHandler.INSTANCE.sendToServer(new AtmDepositMsg(this.getContainer().tileEntity.hand, this.getContainer().tileEntity.getPos()));
+                            break;
                     }
                 }));
         this.addButton(new AtmButton(this.width / 2 + 124, this.height / 2 + 11, 23, 16, Character.toString((char) 0x2B07), 3,
-                (button) -> this.onClose()));
+                (button) -> {
+                    if (keyPadMode == KeyPadMode.Balance)
+                        ModPacketHandler.INSTANCE.sendToServer(new AtmWithdrawMsg(this.getContainer().tileEntity.hand, this.getContainer().tileEntity.getPos(), displayPIN.getValue()));
+                    else
+                        this.onClose();
+                }));
     }
 
     public enum KeyPadMode {

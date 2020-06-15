@@ -8,9 +8,7 @@ import sk.dipo.moneymod.network.packet.client.AtmBalanceMsg;
 import sk.dipo.moneymod.network.packet.client.AtmCardSignedMsg;
 import sk.dipo.moneymod.network.packet.client.AtmErrorMsg;
 import sk.dipo.moneymod.network.packet.client.AtmWrongPasswordMsg;
-import sk.dipo.moneymod.network.packet.server.AtmInitSessionMsg;
-import sk.dipo.moneymod.network.packet.server.AtmLoginMsg;
-import sk.dipo.moneymod.network.packet.server.AtmSignCardMsg;
+import sk.dipo.moneymod.network.packet.server.*;
 
 public class ModPacketHandler {
 
@@ -31,5 +29,7 @@ public class ModPacketHandler {
         INSTANCE.registerMessage(id++, AtmBalanceMsg.class, AtmBalanceMsg::encode, AtmBalanceMsg::decode, AtmBalanceMsg::handle);
         INSTANCE.registerMessage(id++, AtmWrongPasswordMsg.class, AtmWrongPasswordMsg::encode, AtmWrongPasswordMsg::decode, AtmWrongPasswordMsg::handle);
         INSTANCE.registerMessage(id++, AtmErrorMsg.class, AtmErrorMsg::encode, AtmErrorMsg::decode, AtmErrorMsg::handle);
+        INSTANCE.registerMessage(id++, AtmDepositMsg.class, AtmDepositMsg::encode, AtmDepositMsg::decode, AtmDepositMsg::handle);
+        INSTANCE.registerMessage(id++, AtmWithdrawMsg.class, AtmWithdrawMsg::encode, AtmWithdrawMsg::decode, AtmWithdrawMsg::handle);
     }
 }

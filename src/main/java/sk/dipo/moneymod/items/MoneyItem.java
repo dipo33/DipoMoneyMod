@@ -65,6 +65,40 @@ public class MoneyItem extends Item {
         return Items.AIR;
     }
 
+    public static int getCoinValue(Item item) {
+        if (item == ModItems.CENT_1.get())
+            return 1;
+        if (item == ModItems.CENT_2.get())
+            return 2;
+        if (item == ModItems.CENT_5.get())
+            return 5;
+        if (item == ModItems.CENT_10.get())
+            return 10;
+        if (item == ModItems.CENT_20.get())
+            return 20;
+        if (item == ModItems.CENT_50.get())
+            return 50;
+        if (item == ModItems.EURO_1.get())
+            return 100;
+        if (item == ModItems.EURO_2.get())
+            return 200;
+        if (item == ModItems.EURO_5.get())
+            return 500;
+        if (item == ModItems.EURO_10.get())
+            return 1000;
+        if (item == ModItems.EURO_20.get())
+            return 2000;
+        if (item == ModItems.EURO_50.get())
+            return 5000;
+        if (item == ModItems.EURO_100.get())
+            return 10000;
+        if (item == ModItems.EURO_200.get())
+            return 20000;
+        if (item == ModItems.EURO_500.get())
+            return 50000;
+        return 0;
+    }
+
     public static void addRandomMoneyDrop(LivingDropsEvent event, int low, int high) {
         int value = new Random().nextInt(high - low + 1) + low;
 

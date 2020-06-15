@@ -64,6 +64,8 @@ public class AtmPinTextComponent {
             throw new IllegalArgumentException("Digit out of range 0 - 9");
         if (text.length() >= 7)
             return;
+        if (text.length() == 0 && digit == 0)
+            return;
         if (hasDot) {
             if (charsAfterDot > 1)
                 return;
