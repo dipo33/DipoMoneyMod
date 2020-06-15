@@ -1,20 +1,22 @@
 package sk.dipo.moneymod.capability.capability;
 
+import net.minecraft.world.World;
+
 import java.util.UUID;
 
-public interface ICreditCard {
+public interface ICreditCardInfo {
+
+    void init(UUID owner, World world);
 
     boolean hasOwner();
 
     void setHasOwner(boolean hasOwner);
 
-    void newOwner(UUID owner);
-
     UUID getOwner();
 
     void setOwner(UUID owner);
 
-    String getPin();
+    int getCardNumber();
 
-    void setPin(String PIN);
+    void setCardNumber(int number);
 }

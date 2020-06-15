@@ -2,24 +2,32 @@ package sk.dipo.moneymod.world;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
+import org.apache.logging.log4j.util.TriConsumer;
 import sk.dipo.moneymod.MoneyMod;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 
 public class AccountWorldSavedData extends WorldSavedData {
 
     private static final String DATA_NAME = MoneyMod.MODID + "_AccountData";
 
     private final Map<UUID, PlayerAccount> accounts;
+    private final Map<Integer, String> pinCodes;
+    private int nextCardID;
 
     public AccountWorldSavedData() {
         super(DATA_NAME);
         accounts = new HashMap<>();
+        pinCodes = new HashMap<>();
+        nextCardID = 0;
     }
 
     public String getPlayerName(UUID player) {
@@ -53,33 +61,72 @@ public class AccountWorldSavedData extends WorldSavedData {
         this.markDirty();
     }
 
-    @Override
-    public void read(CompoundNBT nbt) {
-        ListNBT listNBT = (ListNBT) nbt.get("Accounts");
-        accounts.clear();
+    public int getNextCardID() {
+        this.markDirty();
+        return this.nextCardID++;
+    }
+
+    public void setNextCardID(int nextCardID) {
+        this.nextCardID = nextCardID;
+        this.markDirty();
+    }
+
+    public String getCardPIN(int cardNumber) {
+        return pinCodes.get(cardNumber);
+    }
+
+    public void setCardPIN(int cardNumber, String pinCode) {
+        this.pinCodes.put(cardNumber, pinCode);
+    }
+
+    private <K, V> void readMap(@Nullable ListNBT listNBT, Map<K, V> map, Function<CompoundNBT, Tuple<K, V>> reader) {
+        map.clear();
         if (listNBT == null)
             return;
+        listNBT.forEach((nbt) -> {
+            Tuple<K, V> entry = reader.apply((CompoundNBT) nbt);
+            map.put(entry.getA(), entry.getB());
+        });
+    }
 
-        listNBT.forEach((nbtAccount) -> {
-            CompoundNBT compoundNBT = (CompoundNBT) nbtAccount;
+    private <K, V> ListNBT writeMap(Map<K, V> map, TriConsumer<CompoundNBT, K, V> writer) {
+        ListNBT listNBT = new ListNBT();
+        map.forEach((key, value) -> {
+            CompoundNBT compoundNBT = new CompoundNBT();
+            writer.accept(compoundNBT, key, value);
+            listNBT.add(compoundNBT);
+        });
+        return listNBT;
+    }
+
+    @Override
+    public void read(CompoundNBT nbt) {
+        this.nextCardID = nbt.getInt("NextCardID");
+        readMap((ListNBT) nbt.get("Accounts"), accounts, (compoundNBT) -> {
             final UUID player = compoundNBT.getUniqueId("Player");
             final String name = compoundNBT.getString("PlayerName");
             final int balance = compoundNBT.getInt("Balance");
-            accounts.put(player, new PlayerAccount(name, balance));
+            return new Tuple<>(player, new PlayerAccount(name, balance));
         });
+        readMap((ListNBT) nbt.get("PinCodes"), pinCodes, (compoundNBT -> {
+            final int cardNumber = compoundNBT.getInt("CardNumber");
+            final String pinCode = compoundNBT.getString("PIN");
+            return new Tuple<>(cardNumber, pinCode);
+        }));
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        ListNBT listNBT = new ListNBT();
-        accounts.forEach((player, account) -> {
-            CompoundNBT compoundNBT = new CompoundNBT();
+        compound.putInt("NextCardID", this.nextCardID);
+        compound.put("Accounts", writeMap(accounts, (compoundNBT, player, account) -> {
             compoundNBT.putUniqueId("Player", player);
             compoundNBT.putString("PlayerName", account.getPlayerName());
             compoundNBT.putInt("Balance", account.getBalance());
-            listNBT.add(compoundNBT);
-        });
-        compound.put("Accounts", listNBT);
+        }));
+        compound.put("PinCodes", writeMap(pinCodes, (compoundNBT, cardNumber, pinCode) -> {
+            compoundNBT.putInt("CardNumber", cardNumber);
+            compoundNBT.putString("PIN", pinCode);
+        }));
         return compound;
     }
 

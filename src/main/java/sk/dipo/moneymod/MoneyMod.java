@@ -15,8 +15,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sk.dipo.moneymod.capability.CapabilityHandler;
-import sk.dipo.moneymod.capability.capability.CreditCardCap;
-import sk.dipo.moneymod.capability.capability.ICreditCard;
+import sk.dipo.moneymod.capability.capability.CreditCardInfo;
+import sk.dipo.moneymod.capability.capability.ICreditCardInfo;
 import sk.dipo.moneymod.capability.storage.CreditCardStorage;
 import sk.dipo.moneymod.config.DipoConfig;
 import sk.dipo.moneymod.init.*;
@@ -57,7 +57,7 @@ public class MoneyMod {
 
         PointOfInterestType.registerBlockStates(ModPOITypes.ATM.get());
 
-        CapabilityManager.INSTANCE.register(ICreditCard.class, new CreditCardStorage(), CreditCardCap::new);
+        CapabilityManager.INSTANCE.register(ICreditCardInfo.class, new CreditCardStorage(), CreditCardInfo::new);
 
         ModPacketHandler.registerMessages();
 

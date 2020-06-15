@@ -1,12 +1,22 @@
 package sk.dipo.moneymod.capability.capability;
 
+import net.minecraft.world.World;
+import sk.dipo.moneymod.world.AccountWorldSavedData;
+
 import java.util.UUID;
 
-public class CreditCardCap implements ICreditCard {
+public class CreditCardInfo implements ICreditCardInfo {
 
     private UUID owner = UUID.randomUUID();
     private boolean hasOwner = false;
-    private String PIN = "";
+    private int cardNumber = -1;
+
+    @Override
+    public void init(UUID owner, World world) {
+        this.owner = owner;
+        this.hasOwner = true;
+        this.cardNumber = AccountWorldSavedData.get(world).getNextCardID();
+    }
 
     @Override
     public boolean hasOwner() {
@@ -16,12 +26,6 @@ public class CreditCardCap implements ICreditCard {
     @Override
     public void setHasOwner(boolean hasOwner) {
         this.hasOwner = hasOwner;
-    }
-
-    @Override
-    public void newOwner(UUID owner) {
-        setOwner(owner);
-        hasOwner = true;
     }
 
     @Override
@@ -35,12 +39,12 @@ public class CreditCardCap implements ICreditCard {
     }
 
     @Override
-    public String getPin() {
-        return this.PIN;
+    public int getCardNumber() {
+        return this.cardNumber;
     }
 
     @Override
-    public void setPin(String PIN) {
-        this.PIN = PIN;
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }
