@@ -44,7 +44,7 @@ public class DipoConfig {
         ENTITIES.put(EntityType.ELDER_GUARDIAN, new Tuple<>(1000, 3000));
         ENTITIES.put(EntityType.ENDER_DRAGON, new Tuple<>(10000, 20000));
         ENTITIES.put(EntityType.ENDERMAN, new Tuple<>(15, 40));
-        ENTITIES.put(EntityType.ENDERMITE, new Tuple<>(1, 10)); // FIXME: Fix this values
+        ENTITIES.put(EntityType.ENDERMITE, new Tuple<>(10, 50));
         ENTITIES.put(EntityType.EVOKER, new Tuple<>(300, 1000));
         ENTITIES.put(EntityType.FOX, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.GHAST, new Tuple<>(50, 100));
