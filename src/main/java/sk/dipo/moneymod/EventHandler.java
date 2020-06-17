@@ -1,6 +1,7 @@
 package sk.dipo.moneymod;
 
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -55,6 +56,10 @@ public class EventHandler {
             return;
         if (DipoConfig.ENTITIES.containsKey(event.getEntity().getType())) {
             Tuple<Integer, Integer> values = DipoConfig.ENTITIES.get(event.getEntity().getType());
+            MoneyItem.addRandomMoneyDrop(event, values.getA(), values.getB());
+        } else if (event.getEntity() instanceof SlimeEntity && DipoConfig.SLIMES.containsKey(event.getEntity().getType())) {
+            final SlimeEntity slime = (SlimeEntity) event.getEntity();
+            Tuple<Integer, Integer> values = DipoConfig.SLIMES.get(event.getEntity().getType()).get(slime.getSlimeSize());
             MoneyItem.addRandomMoneyDrop(event, values.getA(), values.getB());
         }
     }
