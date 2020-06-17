@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "dipomoneymod:cent1",
+    "dipomoneymod:cent2",
+    "dipomoneymod:cent5",
+    "dipomoneymod:cent10",
+    "dipomoneymod:cent20",
+    "dipomoneymod:cent50",
+    "dipomoneymod:euro1",
+    "dipomoneymod:euro2",
+    "dipomoneymod:euro5",
+    "dipomoneymod:euro10",
+    "dipomoneymod:euro20",
+    "dipomoneymod:euro50",
+    "dipomoneymod:euro100",
+    "dipomoneymod:euro200",
+    "dipomoneymod:euro500"
+  ]
+}

@@ -11,8 +11,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.system.CallbackI;
 import sk.dipo.moneymod.container.AtmContainer;
+import sk.dipo.moneymod.datagen.tag.ModItemTags;
 import sk.dipo.moneymod.init.ModBlocks;
 import sk.dipo.moneymod.init.ModTileEntityTypes;
 import sk.dipo.moneymod.items.MoneyItem;
@@ -28,7 +28,7 @@ public class AtmTileEntity extends TileEntity implements INamedContainerProvider
         @Override
         public boolean isItemValid(final int slot, @Nonnull final ItemStack stack) {
             if (slot >= 0 && slot < 18)
-                return stack.getItem() instanceof MoneyItem; // TODO: Change the way of checking bills and coins
+                return ModItemTags.MONEY.contains(stack.getItem());
             else
                 return false;
         }

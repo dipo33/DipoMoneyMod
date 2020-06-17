@@ -40,7 +40,7 @@ public class AtmBlock extends HorizontalBlock {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            final TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof AtmTileEntity) {
                 final ItemStackHandler inventory = ((AtmTileEntity) tileEntity).inventory;
                 for (int slot = 0; slot < inventory.getSlots(); ++slot)

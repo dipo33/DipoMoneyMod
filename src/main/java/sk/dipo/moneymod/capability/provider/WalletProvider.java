@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import sk.dipo.moneymod.items.MoneyItem;
+import sk.dipo.moneymod.datagen.tag.ModItemTags;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ public class WalletProvider implements ICapabilitySerializable<INBT> {
     private final ItemStackHandler inventory = new ItemStackHandler(27) {
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            return stack.getItem() instanceof MoneyItem; // TODO: Change the way of checking bills and coins
+            return ModItemTags.MONEY.contains(stack.getItem());
         }
     };
 
