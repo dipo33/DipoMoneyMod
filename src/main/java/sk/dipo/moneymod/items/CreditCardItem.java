@@ -30,7 +30,6 @@ public class CreditCardItem extends Item {
 
         TileEntity tileEntity = context.getWorld().getTileEntity(context.getPos());
         if (tileEntity instanceof AtmTileEntity) {
-            // TODO: Only if is openable
             AtmTileEntity atmTileEntity = (AtmTileEntity) tileEntity;
             if (!atmTileEntity.isAvailable()) {
                 context.getPlayer().sendMessage(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_not_available")));
