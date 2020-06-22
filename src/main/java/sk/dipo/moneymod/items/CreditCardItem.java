@@ -5,7 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.NetworkHooks;
+import sk.dipo.moneymod.container.ContainerHelper;
 import sk.dipo.moneymod.init.ModBlocks;
 import sk.dipo.moneymod.tileentity.AtmTileEntity;
 
@@ -30,6 +32,10 @@ public class CreditCardItem extends Item {
         if (tileEntity instanceof AtmTileEntity) {
             // TODO: Only if is openable
             AtmTileEntity atmTileEntity = (AtmTileEntity) tileEntity;
+            if (!atmTileEntity.isAvailable()) {
+                context.getPlayer().sendMessage(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_not_available")));
+                return ActionResultType.SUCCESS;
+            }
             atmTileEntity.hand = context.getHand();
             NetworkHooks.openGui((ServerPlayerEntity) Objects.requireNonNull(context.getPlayer()), atmTileEntity, packet -> {
                         packet.writeBlockPos(context.getPos());

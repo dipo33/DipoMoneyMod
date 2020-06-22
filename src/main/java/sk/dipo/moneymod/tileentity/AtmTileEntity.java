@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 public class AtmTileEntity extends TileEntity implements INamedContainerProvider {
 
     public Hand hand;
+    private boolean isAvailable = true;
 
     public final ItemStackHandler inventory = new ItemStackHandler(36) {
         @Override
@@ -52,6 +53,7 @@ public class AtmTileEntity extends TileEntity implements INamedContainerProvider
     @Nullable
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        lockAtm();
         return new AtmContainer(windowId, playerInventory, this);
     }
 
@@ -114,5 +116,17 @@ public class AtmTileEntity extends TileEntity implements INamedContainerProvider
         }
 
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void lockAtm() {
+        isAvailable = false;
+    }
+
+    public void freeAtm() {
+        isAvailable = true;
     }
 }

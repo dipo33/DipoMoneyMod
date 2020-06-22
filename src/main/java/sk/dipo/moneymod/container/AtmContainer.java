@@ -111,4 +111,10 @@ public class AtmContainer extends Container {
         }
         return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
+
+    @Override
+    public void onContainerClosed(PlayerEntity playerIn) {
+        this.tileEntity.freeAtm();
+        super.onContainerClosed(playerIn);
+    }
 }
