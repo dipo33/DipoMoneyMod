@@ -27,9 +27,9 @@
 	"container.dipomoneymod.atm_login": "Welcome @s! Enter your PIN to continue. (Confirm with the green button)",
 	"container.dipomoneymod.atm_balance": "Your balance: @s€",
 	"container.dipomoneymod.atm_wrong_password": "Your PIN code wasn't correct. Pay attention, you have only @s attempts. (Confirm with the green button)",
+	"container.dipomoneymod.atm_card_blocked": "Credit Card was blocked due to 3 incorrect attempts",
 	"container.dipomoneymod.atm_error": "An error occurred. Please close ATM and try again later!",
 	"container.dipomoneymod.atm_not_available": "This ATM is currently occupied, please come back later.",
-	"container.dipomoneymod.atm_card_blocked": "Credit Card was blocked due to 3 incorrect attempts.",
 
 	"entity.minecraft.villager.dipomoneymod.exchanger":  "Exchanger",
 
