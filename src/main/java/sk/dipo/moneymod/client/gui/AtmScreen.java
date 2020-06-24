@@ -84,7 +84,6 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
                     displayPIN.appendDigit(((AtmNumericButton) button).value);
                     break;
             }
-            LogManager.getLogger().debug("text");
         };
 
         this.addButton(new AtmNumericButton(this.width / 2 + 95, this.height / 2 - 25, 16, 16, 1, onPressNum));
