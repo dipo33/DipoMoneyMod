@@ -19,4 +19,12 @@ public interface ICreditCardInfo {
     int getCardNumber();
 
     void setCardNumber(int number);
+
+    int getAttemptsLeft();
+
+    boolean hasAnyAttemptsLeft();
+
+    void decreaseAttempts();
+
+    void resetAttempts();
 }

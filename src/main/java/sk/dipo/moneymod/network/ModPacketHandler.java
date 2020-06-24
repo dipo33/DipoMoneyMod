@@ -4,10 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import sk.dipo.moneymod.MoneyMod;
-import sk.dipo.moneymod.network.packet.client.AtmBalanceMsg;
-import sk.dipo.moneymod.network.packet.client.AtmCardSignedMsg;
-import sk.dipo.moneymod.network.packet.client.AtmErrorMsg;
-import sk.dipo.moneymod.network.packet.client.AtmWrongPasswordMsg;
+import sk.dipo.moneymod.network.packet.client.*;
 import sk.dipo.moneymod.network.packet.server.*;
 
 public class ModPacketHandler {
@@ -31,5 +28,6 @@ public class ModPacketHandler {
         INSTANCE.registerMessage(id++, AtmErrorMsg.class, AtmErrorMsg::encode, AtmErrorMsg::decode, AtmErrorMsg::handle);
         INSTANCE.registerMessage(id++, AtmDepositMsg.class, AtmDepositMsg::encode, AtmDepositMsg::decode, AtmDepositMsg::handle);
         INSTANCE.registerMessage(id++, AtmWithdrawMsg.class, AtmWithdrawMsg::encode, AtmWithdrawMsg::decode, AtmWithdrawMsg::handle);
+        INSTANCE.registerMessage(id++, AtmCardBlocked.class, AtmCardBlocked::encode, AtmCardBlocked::decode, AtmCardBlocked::handle);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import sk.dipo.moneymod.capability.capability.ICreditCardInfo;
 import sk.dipo.moneymod.capability.provider.CreditCardProvider;
 import sk.dipo.moneymod.network.ModPacketHandler;
+import sk.dipo.moneymod.network.packet.client.AtmCardBlocked;
 import sk.dipo.moneymod.network.packet.client.AtmWrongPasswordMsg;
 import sk.dipo.moneymod.network.packet.client.AtmBalanceMsg;
 import sk.dipo.moneymod.network.packet.client.AtmErrorMsg;
@@ -52,15 +53,25 @@ public class AtmLoginMsg {
             AccountWorldSavedData accountData = AccountWorldSavedData.get(sender.getServerWorld());
             String realPin = accountData.getCardPIN(cap.getCardNumber());
             if (pinCode.equals(realPin)) {
+                cap.resetAttempts();
                 ModPacketHandler.INSTANCE.send(
                         PacketDistributor.PLAYER.with(() -> sender),
                         new AtmBalanceMsg(accountData.getBalance(cap.getOwner()))
                 );
             } else {
-                ModPacketHandler.INSTANCE.send(
-                        PacketDistributor.PLAYER.with(() -> sender),
-                        new AtmWrongPasswordMsg(3) // TODO: Real attempts
-                );
+                cap.decreaseAttempts();
+                if (cap.hasAnyAttemptsLeft()) {
+                    ModPacketHandler.INSTANCE.send(
+                            PacketDistributor.PLAYER.with(() -> sender),
+                            new AtmWrongPasswordMsg(cap.getAttemptsLeft())
+                    );
+                } else {
+                    sender.getHeldItem(hand).shrink(1);
+                    ModPacketHandler.INSTANCE.send(
+                            PacketDistributor.PLAYER.with(() -> sender),
+                            new AtmCardBlocked()
+                    );
+                }
             }
         });
         ctx.get().setPacketHandled(true);

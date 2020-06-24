@@ -125,8 +125,6 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
                 (button) -> {
                     if (keyPadMode == KeyPadMode.Balance)
                         ModPacketHandler.INSTANCE.sendToServer(new AtmWithdrawMsg(this.getContainer().tileEntity.hand, this.getContainer().tileEntity.getPos(), displayPIN.getValue()));
-                    else
-                        this.onClose();
                 }));
     }
 

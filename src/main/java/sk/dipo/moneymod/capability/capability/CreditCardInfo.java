@@ -10,6 +10,7 @@ public class CreditCardInfo implements ICreditCardInfo {
     private UUID owner = UUID.randomUUID();
     private boolean hasOwner = false;
     private int cardNumber = -1;
+    private int attemptsLeft = 3;
 
     @Override
     public void init(UUID owner, World world) {
@@ -46,5 +47,27 @@ public class CreditCardInfo implements ICreditCardInfo {
     @Override
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public int getAttemptsLeft() {
+        return attemptsLeft;
+    }
+
+    @Override
+    public boolean hasAnyAttemptsLeft() {
+        return attemptsLeft > 0;
+    }
+
+    @Override
+    public void decreaseAttempts() {
+        attemptsLeft--;
+        if (attemptsLeft < 0)
+            attemptsLeft = 0;
+    }
+
+    @Override
+    public void resetAttempts() {
+        attemptsLeft = 3;
     }
 }
