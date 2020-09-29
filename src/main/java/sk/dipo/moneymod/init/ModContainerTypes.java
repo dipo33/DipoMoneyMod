@@ -12,7 +12,7 @@ import sk.dipo.moneymod.container.WalletContainer;
 
 public class ModContainerTypes {
 
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, MoneyMod.MODID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, MoneyMod.MODID);
 
     public static final RegistryObject<ContainerType<WalletContainer>> WALLET = CONTAINER_TYPES.register("wallet", () -> IForgeContainerType.create((windowId, inv, data) -> {
         Hand hand = data.readEnumValue(Hand.class);

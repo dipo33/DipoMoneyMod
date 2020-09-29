@@ -10,7 +10,7 @@ import sk.dipo.moneymod.items.MoneyItem;
 import sk.dipo.moneymod.items.WalletItem;
 
 public class ModItems {
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, MoneyMod.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MoneyMod.MODID);
 
     public static final RegistryObject<Item> CENT_1 = ITEMS.register("cent1", () -> new MoneyItem(new Item.Properties(), 1));
     public static final RegistryObject<Item> CENT_2 = ITEMS.register("cent2", () -> new MoneyItem(new Item.Properties(), 2));

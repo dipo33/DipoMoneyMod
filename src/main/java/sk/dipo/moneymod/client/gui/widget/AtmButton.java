@@ -1,5 +1,6 @@
 package sk.dipo.moneymod.client.gui.widget;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -7,7 +8,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import org.apache.logging.log4j.LogManager;
+import net.minecraft.util.text.StringTextComponent;
 import sk.dipo.moneymod.MoneyMod;
 
 public class AtmButton extends Button {
@@ -19,12 +20,12 @@ public class AtmButton extends Button {
     private boolean isClicked = false;
 
     public AtmButton(int widthIn, int heightIn, int width, int height, String text, int buttonType, Button.IPressable onPress) {
-        super(widthIn, heightIn, width, height, text, onPress);
+        super(widthIn, heightIn, width, height, new StringTextComponent(text), onPress);
         this.offset = getButtonOffset(buttonType);
     }
 
     @Override
-    public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+    public void renderButton(MatrixStack matrixStack, int p_230431_2_, int p_230431_3_, float p_230431_4_) {
         Minecraft minecraft = Minecraft.getInstance();
         FontRenderer fontrenderer = minecraft.fontRenderer;
         minecraft.getTextureManager().bindTexture(BUTTON_TEXTURES);
@@ -34,10 +35,10 @@ public class AtmButton extends Button {
         RenderSystem.defaultBlendFunc();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-        this.blit(this.x, this.y, this.width * getState() + this.offset, 225, this.width, this.height);
-        this.renderBg(minecraft, p_renderButton_1_, p_renderButton_2_);
+        this.blit(matrixStack, this.x, this.y, this.width * getState() + this.offset, 225, this.width, this.height);
+        this.renderBg(matrixStack, minecraft, p_230431_2_, p_230431_3_);
         int j = getFGColor();
-        this.drawCenteredString(fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        this.drawCenteredString(matrixStack, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
     }
 
     @Override

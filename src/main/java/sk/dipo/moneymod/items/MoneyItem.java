@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import sk.dipo.moneymod.datagen.tag.ModItemTags;
 import sk.dipo.moneymod.init.ModItemGroups;
+import sk.dipo.moneymod.init.ModItems;
 
 import java.util.Random;
 
@@ -32,9 +33,37 @@ public class MoneyItem extends Item {
     }
 
     public static Item getCoinByValue(int value) {
-        for (Item item : ModItemTags.MONEY.getAllElements()) {
-            if (((MoneyItem) item).value == value)
-                return item;
+        switch (value) {
+            case 1:
+                return ModItems.CENT_1.get();
+            case 2:
+                return ModItems.CENT_2.get();
+            case 5:
+                return ModItems.CENT_5.get();
+            case 10:
+                return ModItems.CENT_10.get();
+            case 20:
+                return ModItems.CENT_20.get();
+            case 50:
+                return ModItems.CENT_50.get();
+            case 100:
+                return ModItems.EURO_1.get();
+            case 200:
+                return ModItems.EURO_2.get();
+            case 500:
+                return ModItems.EURO_5.get();
+            case 1000:
+                return ModItems.EURO_10.get();
+            case 2000:
+                return ModItems.EURO_20.get();
+            case 5000:
+                return ModItems.EURO_50.get();
+            case 10000:
+                return ModItems.EURO_100.get();
+            case 20000:
+                return ModItems.EURO_200.get();
+            case 50000:
+                return ModItems.EURO_500.get();
         }
         return Items.AIR;
     }

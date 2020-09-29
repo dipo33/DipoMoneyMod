@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 public class AtmBlock extends HorizontalBlock {
 
     public AtmBlock(Properties properties) {
-        super(properties.lightValue(15));
+        super(properties);
         super.setDefaultState(this.getDefaultState()
                 .with(HORIZONTAL_FACING, Direction.NORTH)
         );
@@ -59,5 +59,10 @@ public class AtmBlock extends HorizontalBlock {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(HORIZONTAL_FACING);
+    }
+
+    @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return 15;
     }
 }

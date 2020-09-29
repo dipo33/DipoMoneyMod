@@ -1,5 +1,6 @@
 package sk.dipo.moneymod.client.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -36,19 +37,19 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.func_230459_a_(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        this.font.drawString(this.title.getFormattedText(), 42.0F, 5.0F, 0x404040);
-        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
-        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
-        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
-        this.font.drawString(displayPIN.getFormattedText(), 219, 27, 16777215);
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+        this.font.drawString(matrixStack, this.title.getString(), 42.0F, 5.0F, 0x404040);
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 42.0F, (float) (this.ySize - 93), 0x404040);
+        this.font.drawString(matrixStack, new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getString(), 42, 31, 4210752);
+        this.font.drawString(matrixStack, new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getString(), 42, 81, 4210752);
+        this.font.drawString(matrixStack, displayPIN.getFormattedText(), 219, 27, 16777215);
 
         final double scale = this.getMinecraft().getMainWindow().getGuiScaleFactor();
         final double height = this.getMinecraft().getMainWindow().getFramebufferHeight();
@@ -56,21 +57,52 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         GL11.glScissor((int) ((this.guiLeft + 34 + 10) * scale), (int) (height - (this.guiTop + 28) * scale),
                 (int) (156 * scale), (int) (14 * scale));
         displayMain.tick();
-        this.font.drawString(displayMain.getFormattedText(), 44 - displayMain.getOffset(), 17, 16777215);
+        this.font.drawString(matrixStack, displayMain.getFormattedText(), 44 - displayMain.getOffset(), 17, 16777215);
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+        super.func_230459_a_(matrixStack, x, y);
         assert this.minecraft != null : "Minecraft is null";
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GUI);
         int relX = (this.width - this.xSize + 68) / 2;
         int relY = (this.height - this.ySize) / 2;
-        this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
+        this.blit(matrixStack, relX, relY, 0, 0, this.xSize, this.ySize);
     }
 
+    //
+//    @Override
+//    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+//        this.font.drawString(this.title.getFormattedText(), 42.0F, 5.0F, 0x404040);
+//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
+//        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
+//        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
+//        this.font.drawString(displayPIN.getFormattedText(), 219, 27, 16777215);
+//
+//        final double scale = this.getMinecraft().getMainWindow().getGuiScaleFactor();
+//        final double height = this.getMinecraft().getMainWindow().getFramebufferHeight();
+//        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+//        GL11.glScissor((int) ((this.guiLeft + 34 + 10) * scale), (int) (height - (this.guiTop + 28) * scale),
+//                (int) (156 * scale), (int) (14 * scale));
+//        displayMain.tick();
+//        this.font.drawString(displayMain.getFormattedText(), 44 - displayMain.getOffset(), 17, 16777215);
+//        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+//    }
+//
+//    @Override
+//    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+//        assert this.minecraft != null : "Minecraft is null";
+//
+//        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+//        this.minecraft.getTextureManager().bindTexture(GUI);
+//        int relX = (this.width - this.xSize + 68) / 2;
+//        int relY = (this.height - this.ySize) / 2;
+//        this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
+//    }
+//
     @Override
     protected void init() {
         super.init();

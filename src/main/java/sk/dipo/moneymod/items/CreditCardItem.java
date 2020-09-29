@@ -1,5 +1,6 @@
 package sk.dipo.moneymod.items;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
@@ -32,7 +33,10 @@ public class CreditCardItem extends Item {
         if (tileEntity instanceof AtmTileEntity) {
             AtmTileEntity atmTileEntity = (AtmTileEntity) tileEntity;
             if (!atmTileEntity.isAvailable()) {
-                context.getPlayer().sendMessage(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_not_available")));
+                final PlayerEntity player = context.getPlayer();
+                if (player == null)
+                    return ActionResultType.PASS;
+                player.sendMessage(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_not_available")), player.getGameProfile().getId());
                 return ActionResultType.SUCCESS;
             }
             atmTileEntity.hand = context.getHand();

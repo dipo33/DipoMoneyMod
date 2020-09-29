@@ -10,7 +10,7 @@ import sk.dipo.moneymod.MoneyMod;
 
 public class ModVillagerProfessions {
 
-    public static final DeferredRegister<VillagerProfession> PROFESSIONS = new DeferredRegister<>(ForgeRegistries.PROFESSIONS, MoneyMod.MODID);
+    public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, MoneyMod.MODID);
 
     public static RegistryObject<VillagerProfession> EXCHANGER = PROFESSIONS.register("exchanger", () -> new VillagerProfession("exchanger", ModPOITypes.ATM.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
 }

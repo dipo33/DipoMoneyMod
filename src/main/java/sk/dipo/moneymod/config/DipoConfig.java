@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 import sk.dipo.moneymod.MoneyMod;
+import sk.dipo.moneymod.init.ModItems;
 import sk.dipo.moneymod.items.MoneyItem;
 
 import java.util.HashMap;
@@ -61,7 +62,7 @@ public class DipoConfig {
         ENTITIES.put(EntityType.PARROT, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.PIG, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.PUFFERFISH, new Tuple<>(0, 0));
-        ENTITIES.put(EntityType.ZOMBIE_PIGMAN, new Tuple<>(10, 20));
+        ENTITIES.put(EntityType.ZOMBIFIED_PIGLIN, new Tuple<>(10, 20)); // FIXME: PIGMAN
         ENTITIES.put(EntityType.POLAR_BEAR, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.RABBIT, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.SALMON, new Tuple<>(0, 0));
@@ -170,7 +171,7 @@ public class DipoConfig {
 
             builder.push("Mob Drops");
             DipoConfig.ENTITIES.forEach((k, v) -> {
-                String name = k.getName().getFormattedText().replaceAll(" ", "");
+                String name = k.getName().getString().replaceAll(" ", "");
                 builder.push(name);
                 ForgeConfigSpec.IntValue min = builder
                         .comment("Minimal money drop of " + name)
@@ -185,7 +186,7 @@ public class DipoConfig {
             });
             DipoConfig.SLIMES.forEach((entityType, map) -> {
                 Map<Integer, Tuple<ForgeConfigSpec.IntValue, ForgeConfigSpec.IntValue>> slimes = new HashMap<>();
-                String typeStr = entityType.getName().getFormattedText().replaceAll(" ", "");
+                String typeStr = entityType.getName().getString().replaceAll(" ", "");
                 builder.push(typeStr);
                 map.forEach((slimeSize, integerTuple) -> {
                     String name = "Size_" + slimeSize;

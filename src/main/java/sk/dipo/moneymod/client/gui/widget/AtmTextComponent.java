@@ -27,7 +27,7 @@ public class AtmTextComponent {
             else
                 throw new IllegalArgumentException("Invalid Type Of AtmTextComponent");
         }
-        text = applyFormats(new TranslationTextComponent(unlocalizedName).getFormattedText());
+        text = applyFormats(new TranslationTextComponent(unlocalizedName).getString());
         width = Minecraft.getInstance().fontRenderer.getStringWidth(text);
         if (width > MAX_SENTENCE_LENGTH) {
             text += "        " + text;

@@ -17,7 +17,7 @@ public class ModPOITypes {
         return ImmutableSet.copyOf(blockIn.getStateContainer().getValidStates());
     }
 
-    public static final DeferredRegister<PointOfInterestType> POI_TYPES = new DeferredRegister<>(ForgeRegistries.POI_TYPES, MoneyMod.MODID);
+    public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, MoneyMod.MODID);
 
     public static RegistryObject<PointOfInterestType> ATM = POI_TYPES.register("exchanger", () -> new PointOfInterestType("exchanger", getAllStates(ModBlocks.ATM_BLOCK.get()), 1, 1));
 }
