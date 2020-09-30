@@ -62,7 +62,6 @@ public class DipoConfig {
         ENTITIES.put(EntityType.PARROT, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.PIG, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.PUFFERFISH, new Tuple<>(0, 0));
-        ENTITIES.put(EntityType.ZOMBIFIED_PIGLIN, new Tuple<>(10, 20)); // FIXME: PIGMAN
         ENTITIES.put(EntityType.POLAR_BEAR, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.RABBIT, new Tuple<>(0, 0));
         ENTITIES.put(EntityType.SALMON, new Tuple<>(0, 0));
@@ -93,6 +92,12 @@ public class DipoConfig {
         ENTITIES.put(EntityType.ZOMBIE_VILLAGER, new Tuple<>(1, 10));
         ENTITIES.put(EntityType.PHANTOM, new Tuple<>(20, 50));
         ENTITIES.put(EntityType.RAVAGER, new Tuple<>(1000, 1500));
+        ENTITIES.put(EntityType.ZOMBIFIED_PIGLIN, new Tuple<>(10, 20));
+        ENTITIES.put(EntityType.PIGLIN, new Tuple<>(10, 30));
+        ENTITIES.put(EntityType.HOGLIN, new Tuple<>(30, 50));
+        ENTITIES.put(EntityType.ZOGLIN, new Tuple<>(200, 300));
+        ENTITIES.put(EntityType.field_242287_aj, new Tuple<>(200, 300));
+        ENTITIES.put(EntityType.STRIDER, new Tuple<>(0, 0));
 
         Map<Integer, Tuple<Integer, Integer>> regularSlimes = new HashMap<>();
         regularSlimes.put(1, new Tuple<>(1, 2));

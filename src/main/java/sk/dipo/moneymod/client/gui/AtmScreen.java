@@ -40,7 +40,7 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrixStack, mouseX, mouseY);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
@@ -63,7 +63,6 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-        super.func_230459_a_(matrixStack, x, y);
         assert this.minecraft != null : "Minecraft is null";
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -73,36 +72,6 @@ public class AtmScreen extends ContainerScreen<AtmContainer> {
         this.blit(matrixStack, relX, relY, 0, 0, this.xSize, this.ySize);
     }
 
-    //
-//    @Override
-//    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-//        this.font.drawString(this.title.getFormattedText(), 42.0F, 5.0F, 0x404040);
-//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 42.0F, (float) (this.ySize - 93), 0x404040);
-//        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_in")).getFormattedText(), 42, 31, 4210752);
-//        this.font.drawString(new TranslationTextComponent(ContainerHelper.getUnlocalizedText("atm_out")).getFormattedText(), 42, 81, 4210752);
-//        this.font.drawString(displayPIN.getFormattedText(), 219, 27, 16777215);
-//
-//        final double scale = this.getMinecraft().getMainWindow().getGuiScaleFactor();
-//        final double height = this.getMinecraft().getMainWindow().getFramebufferHeight();
-//        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-//        GL11.glScissor((int) ((this.guiLeft + 34 + 10) * scale), (int) (height - (this.guiTop + 28) * scale),
-//                (int) (156 * scale), (int) (14 * scale));
-//        displayMain.tick();
-//        this.font.drawString(displayMain.getFormattedText(), 44 - displayMain.getOffset(), 17, 16777215);
-//        GL11.glDisable(GL11.GL_SCISSOR_TEST);
-//    }
-//
-//    @Override
-//    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-//        assert this.minecraft != null : "Minecraft is null";
-//
-//        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-//        this.minecraft.getTextureManager().bindTexture(GUI);
-//        int relX = (this.width - this.xSize + 68) / 2;
-//        int relY = (this.height - this.ySize) / 2;
-//        this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
-//    }
-//
     @Override
     protected void init() {
         super.init();
